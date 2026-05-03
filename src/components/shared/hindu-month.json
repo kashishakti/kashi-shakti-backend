@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_hindu_months",
+  "info": {
+    "displayName": "HinduMonth"
+  },
+  "options": {},
+  "attributes": {
+    "Month": {
+      "type": "enumeration",
+      "enum": [
+        "Chaitra",
+        "Vaishakha",
+        "Jyeshtha",
+        "Ashadha",
+        "Shravana",
+        "Bhadrapada",
+        "Ashwin",
+        "Kartika",
+        "Margashirsha",
+        "Pausha",
+        "Magha",
+        "Phalguna"
+      ]
+    }
+  },
+  "config": {}
+}

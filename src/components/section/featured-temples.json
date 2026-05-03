@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_section_featured_temples",
+  "info": {
+    "displayName": "Featured Temples"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "temples": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::temple.temple"
+    },
+    "Link": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

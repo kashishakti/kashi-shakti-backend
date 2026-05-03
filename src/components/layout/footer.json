@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer"
+  },
+  "options": {},
+  "attributes": {
+    "Logo": {
+      "type": "component",
+      "component": "shared.logo-link",
+      "repeatable": false
+    },
+    "menus": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::menu.menu"
+    },
+    "SocialLinks": {
+      "type": "component",
+      "component": "shared.logo-link",
+      "repeatable": true
+    },
+    "BrandInformation": {
+      "type": "text"
+    },
+    "CopyrightText": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

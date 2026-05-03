@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_section_featured_vrats",
+  "info": {
+    "displayName": "Featured Vrat"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "VratLink": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    },
+    "vrats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vrat.vrat"
+    }
+  },
+  "config": {}
+}

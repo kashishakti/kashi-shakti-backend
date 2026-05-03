@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_layout_headers",
+  "info": {
+    "displayName": "Header"
+  },
+  "options": {},
+  "attributes": {
+    "Logo": {
+      "type": "component",
+      "component": "shared.logo-link",
+      "repeatable": false
+    },
+    "menu": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::menu.menu"
+    }
+  },
+  "config": {}
+}

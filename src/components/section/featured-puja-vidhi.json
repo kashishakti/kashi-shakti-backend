@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_section_featured_puja_vidhis",
+  "info": {
+    "displayName": "Featured Puja Vidhi"
+  },
+  "options": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "PujaVidhiLink": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    },
+    "puja_vidhis": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::puja-vidhi.puja-vidhi"
+    }
+  },
+  "config": {}
+}

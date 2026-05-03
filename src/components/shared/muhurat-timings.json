@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_muhurat_timings",
+  "info": {
+    "displayName": "MuhuratTimings"
+  },
+  "options": {},
+  "attributes": {
+    "StartTime": {
+      "type": "time"
+    },
+    "EndTime": {
+      "type": "time"
+    }
+  },
+  "config": {}
+}

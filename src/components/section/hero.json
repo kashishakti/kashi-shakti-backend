@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_section_heroes",
+  "info": {
+    "displayName": "Hero"
+  },
+  "options": {},
+  "attributes": {
+    "Heading": {
+      "type": "string"
+    },
+    "SubHeading": {
+      "type": "text"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "HeroLink": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    },
+    "HeroImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

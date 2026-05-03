@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_shared_seos",
+  "info": {
+    "displayName": "SEO"
+  },
+  "options": {},
+  "attributes": {
+    "MetaTitle": {
+      "type": "string"
+    },
+    "MetaDescription": {
+      "type": "text"
+    },
+    "MetaRobots": {
+      "type": "enumeration",
+      "default": "index,follow",
+      "enum": [
+        "index,follow",
+        "noindex,follow",
+        "index,nofollow",
+        "noindex,nofollow"
+      ]
+    },
+    "Open_Graph_Title": {
+      "type": "string"
+    },
+    "Open_Graph_Description": {
+      "type": "text"
+    },
+    "MetaImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}
