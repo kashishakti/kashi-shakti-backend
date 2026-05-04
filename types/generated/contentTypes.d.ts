@@ -1005,6 +1005,135 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
+  collectionName: 'pradoshes';
+  info: {
+    displayName: 'Pradosh';
+    pluralName: 'pradoshes';
+    singularName: 'pradosh';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    AltText: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Content: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Date: Schema.Attribute.Date &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DayPradoshaTime: Schema.Attribute.Component<
+      'shared.muhurat-timings',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FeaturedImage: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    HinduMonth: Schema.Attribute.Component<'shared.hindu-month', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::pradosh.pradosh'
+    >;
+    Muhurat: Schema.Attribute.Component<'shared.muhurat-timings', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    NextPradoshLink: Schema.Attribute.Component<'shared.link', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Notes: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    PradoshBlock: Schema.Attribute.DynamicZone<
+      ['shared.link', 'shared.fa-qs']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    SEO: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Slug: Schema.Attribute.UID<'Title'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    TrayodashiTithi: Schema.Attribute.Component<
+      'shared.muhurat-timings',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPujaVidhiPujaVidhi extends Struct.CollectionTypeSchema {
   collectionName: 'puja_vidhis';
   info: {
@@ -1392,34 +1521,6 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-  };
-}
-
-export interface ApiVratVrat extends Struct.CollectionTypeSchema {
-  collectionName: 'vrats';
-  info: {
-    displayName: 'Vrats';
-    pluralName: 'vrats';
-    singularName: 'vrat';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::vrat.vrat'>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -1941,12 +2042,12 @@ declare module '@strapi/strapi' {
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::menu.menu': ApiMenuMenu;
       'api::page.page': ApiPagePage;
+      'api::pradosh.pradosh': ApiPradoshPradosh;
       'api::puja-vidhi.puja-vidhi': ApiPujaVidhiPujaVidhi;
       'api::purnima.purnima': ApiPurnimaPurnima;
       'api::temple.temple': ApiTempleTemple;
       'api::test.test': ApiTestTest;
       'api::vrat-katha.vrat-katha': ApiVratKathaVratKatha;
-      'api::vrat.vrat': ApiVratVrat;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
