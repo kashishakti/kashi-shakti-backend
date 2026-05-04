@@ -31,16 +31,6 @@
         }
       }
     },
-    "HeroSection": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "section.hero",
-      "repeatable": true
-    },
     "TrustBadges": {
       "type": "component",
       "pluginOptions": {
@@ -80,6 +70,17 @@
       },
       "component": "section.featured-puja-vidhi",
       "repeatable": false
+    },
+    "LandingPageBlock": {
+      "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "components": [
+        "section.hero"
+      ]
     }
   }
 }

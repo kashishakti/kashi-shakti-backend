@@ -23,6 +23,15 @@
         }
       }
     },
+    "Slug": {
+      "type": "uid",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "targetField": "Title"
+    },
     "Description": {
       "type": "text",
       "pluginOptions": {
