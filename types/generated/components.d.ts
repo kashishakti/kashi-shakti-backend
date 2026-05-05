@@ -74,6 +74,10 @@ export interface SectionFeaturedVrat extends Struct.ComponentSchema {
   attributes: {
     Description: Schema.Attribute.Text;
     heading: Schema.Attribute.String;
+    vrat_kathas: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::vrat-katha.vrat-katha'
+    >;
     VratLink: Schema.Attribute.Component<'shared.link', false>;
   };
 }

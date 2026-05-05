@@ -15,6 +15,11 @@
       "type": "component",
       "component": "shared.link",
       "repeatable": false
+    },
+    "vrat_kathas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vrat-katha.vrat-katha"
     }
   },
   "config": {}
