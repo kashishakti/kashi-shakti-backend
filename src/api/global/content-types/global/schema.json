@@ -17,7 +17,6 @@
   "attributes": {
     "title": {
       "type": "string",
-      "private": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -26,7 +25,6 @@
     },
     "description": {
       "type": "text",
-      "private": true,
       "pluginOptions": {
         "i18n": {
           "localized": true

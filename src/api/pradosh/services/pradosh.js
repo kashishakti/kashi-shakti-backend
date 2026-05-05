@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * vrat service
+ * pradosh service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::vrat.vrat');
+module.exports = createCoreService('api::pradosh.pradosh');

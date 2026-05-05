@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * vrat controller
+ * pradosh controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::vrat.vrat');
+module.exports = createCoreController('api::pradosh.pradosh');

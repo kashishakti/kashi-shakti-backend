@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "ekadashis",
+  "collectionName": "pradoshes",
   "info": {
-    "singularName": "ekadashi",
-    "pluralName": "ekadashis",
-    "displayName": "Ekadashi"
+    "singularName": "pradosh",
+    "pluralName": "pradoshes",
+    "displayName": "Pradosh"
   },
   "options": {
     "draftAndPublish": true
@@ -32,7 +32,7 @@
       },
       "targetField": "Title"
     },
-    "ShortDescription": {
+    "Description": {
       "type": "text",
       "pluginOptions": {
         "i18n": {
@@ -56,6 +56,7 @@
         }
       },
       "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -68,19 +69,7 @@
         }
       }
     },
-    "EkadashiPaksha": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "enum": [
-        "Krishna Ekadashi",
-        "Shukla Ekadashi"
-      ]
-    },
-    "EkadashiMonth": {
+    "HinduMonth": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
@@ -90,7 +79,7 @@
       "component": "shared.hindu-month",
       "repeatable": false
     },
-    "ParanaTime": {
+    "Muhurat": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
@@ -100,7 +89,7 @@
       "component": "shared.muhurat-timings",
       "repeatable": false
     },
-    "EkadashiTime": {
+    "DayPradoshaTime": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
@@ -109,6 +98,24 @@
       },
       "component": "shared.muhurat-timings",
       "repeatable": false
+    },
+    "TrayodashiTithi": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.muhurat-timings",
+      "repeatable": false
+    },
+    "Content": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "Notes": {
       "type": "text",
@@ -118,15 +125,7 @@
         }
       }
     },
-    "Description": {
-      "type": "blocks",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "NextEkadashiLink": {
+    "NextPradoshLink": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
@@ -135,6 +134,18 @@
       },
       "component": "shared.link",
       "repeatable": false
+    },
+    "PradoshBlock": {
+      "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "components": [
+        "shared.link",
+        "shared.fa-qs"
+      ]
     },
     "SEO": {
       "type": "component",
@@ -145,18 +156,6 @@
       },
       "component": "shared.seo",
       "repeatable": false
-    },
-    "EkadashiBlock": {
-      "type": "dynamiczone",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "components": [
-        "shared.fa-qs",
-        "shared.link"
-      ]
     }
   }
 }
