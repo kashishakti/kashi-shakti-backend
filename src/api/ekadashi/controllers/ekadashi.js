@@ -8,6 +8,8 @@
 
 // module.exports = createCoreController('api::ekadashi.ekadashi');
 
+'use strict';
+
 const { createCoreController } = require('@strapi/strapi').factories;
 
 const media = {
@@ -15,7 +17,7 @@ const media = {
 };
 
 const populate = {
-  // 🔹 Top-level media
+  // 🔹 Media
   FeaturedImage: media,
 
   // 🔹 Components
@@ -23,23 +25,59 @@ const populate = {
   ParanaTime: true,
   EkadashiTime: true,
 
-  NextEkadashiLink: true,
+  // 🔹 Next Ekadashi (relation inside)
+  NextEkadashiLink: {
+    populate: {
+      ekadashis: true,
+    },
+  },
 
-  // 🔹 SEO (has media!)
+  // 🔹 SEO
   SEO: {
     populate: {
       MetaImage: media,
     },
   },
 
-  // 🔹 Dynamic Zone
+  // 🔹 Dynamic Zone (NOW FULLY CONTROLLED)
   EkadashiBlock: {
     on: {
       'shared.fa-qs': {
-        populate: '*', // no media here, safe
+        populate: '*',
       },
+
       'shared.link': {
         populate: '*',
+      },
+
+      'shared.related-ekadashi': {
+        populate: {
+          ekadashis: true,
+        },
+      },
+
+      'shared.related-vrat-katha': {
+        populate: {
+          vrat_kathas: true,
+        },
+      },
+
+      'shared.related-puja-vidhi': {
+        populate: {
+          puja_vidhis: true,
+        },
+      },
+
+      'shared.related-festivals': {
+        populate: {
+          festivals: true,
+        },
+      },
+
+      'shared.related-temples': {
+        populate: {
+          temples: true,
+        },
       },
     },
   },
@@ -47,7 +85,7 @@ const populate = {
 
 module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => ({
 
-  // ✅ GET ALL
+  // 🔹 GET ALL
   async find(ctx) {
     const data = await strapi.entityService.findMany(
       'api::ekadashi.ekadashi',
@@ -60,7 +98,7 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
     ctx.body = data;
   },
 
-  // ✅ GET BY ID
+  // 🔹 GET BY ID
   async findOne(ctx) {
     const { id } = ctx.params;
 
@@ -73,7 +111,7 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
     ctx.body = data;
   },
 
-  // ✅ GET BY SLUG (best)
+  // 🔹 GET BY SLUG
   async findBySlug(ctx) {
     const { slug } = ctx.params;
 
