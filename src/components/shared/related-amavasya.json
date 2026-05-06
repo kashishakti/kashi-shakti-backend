@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_amavasyas",
+  "info": {
+    "displayName": "RelatedAmavasya"
+  },
+  "options": {},
+  "attributes": {
+    "amavasyas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::amavasya.amavasya"
+    }
+  },
+  "config": {}
+}

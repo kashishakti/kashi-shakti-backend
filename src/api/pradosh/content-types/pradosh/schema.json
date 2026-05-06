@@ -61,14 +61,6 @@
         "images"
       ]
     },
-    "AltText": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "HinduMonth": {
       "type": "component",
       "pluginOptions": {
@@ -109,16 +101,16 @@
       "component": "shared.muhurat-timings",
       "repeatable": false
     },
-    "Content": {
-      "type": "blocks",
+    "Notes": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "Notes": {
-      "type": "text",
+    "Content": {
+      "type": "blocks",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -132,7 +124,7 @@
           "localized": true
         }
       },
-      "component": "shared.link",
+      "component": "shared.related-pradosh",
       "repeatable": false
     },
     "PradoshBlock": {
@@ -144,7 +136,12 @@
       },
       "components": [
         "shared.link",
-        "shared.fa-qs"
+        "shared.fa-qs",
+        "shared.related-vrat-katha",
+        "shared.related-temples",
+        "shared.related-puja-vidhi",
+        "shared.related-pradosh",
+        "shared.related-festivals"
       ]
     },
     "SEO": {

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_vrat_kathas",
+  "info": {
+    "displayName": "RelatedVratKatha"
+  },
+  "options": {},
+  "attributes": {
+    "vrat_kathas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vrat-katha.vrat-katha"
+    }
+  },
+  "config": {}
+}

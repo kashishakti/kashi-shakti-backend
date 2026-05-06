@@ -60,14 +60,6 @@
         "images"
       ]
     },
-    "AltText": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "EkadashiPaksha": {
       "type": "enumeration",
       "pluginOptions": {
@@ -133,7 +125,7 @@
           "localized": true
         }
       },
-      "component": "shared.link",
+      "component": "shared.related-ekadashi",
       "repeatable": false
     },
     "SEO": {
@@ -155,7 +147,12 @@
       },
       "components": [
         "shared.fa-qs",
-        "shared.link"
+        "shared.link",
+        "shared.related-ekadashi",
+        "shared.related-vrat-katha",
+        "shared.related-puja-vidhi",
+        "shared.related-festivals",
+        "shared.related-temples"
       ]
     }
   }

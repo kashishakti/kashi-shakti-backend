@@ -107,43 +107,6 @@ export interface AdminApiTokenPermission extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface AdminAuditLog extends Struct.CollectionTypeSchema {
-  collectionName: 'strapi_audit_logs';
-  info: {
-    displayName: 'Audit Log';
-    pluralName: 'audit-logs';
-    singularName: 'audit-log';
-  };
-  options: {
-    draftAndPublish: false;
-    timestamps: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    action: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    date: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::audit-log'> &
-      Schema.Attribute.Private;
-    payload: Schema.Attribute.JSON;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
-  };
-}
-
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -483,14 +446,16 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     AmavasyaBlock: Schema.Attribute.DynamicZone<
-      ['shared.link', 'shared.fa-qs']
+      [
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-puja-vidhi',
+        'shared.related-festivals',
+        'shared.related-amavasya',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -538,7 +503,10 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    NextAmavsyaLink: Schema.Attribute.Component<'shared.link', false> &
+    NextAmavasyaLink: Schema.Attribute.Component<
+      'shared.related-amavasya',
+      false
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -597,12 +565,6 @@ export interface ApiEkadashiEkadashi extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -619,7 +581,15 @@ export interface ApiEkadashiEkadashi extends Struct.CollectionTypeSchema {
         };
       }>;
     EkadashiBlock: Schema.Attribute.DynamicZone<
-      ['shared.fa-qs', 'shared.link']
+      [
+        'shared.fa-qs',
+        'shared.link',
+        'shared.related-ekadashi',
+        'shared.related-vrat-katha',
+        'shared.related-puja-vidhi',
+        'shared.related-festivals',
+        'shared.related-temples',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -657,7 +627,10 @@ export interface ApiEkadashiEkadashi extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::ekadashi.ekadashi'
     >;
-    NextEkadashiLink: Schema.Attribute.Component<'shared.link', false> &
+    NextEkadashiLink: Schema.Attribute.Component<
+      'shared.related-ekadashi',
+      false
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -722,12 +695,6 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1058,12 +1025,6 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     Content: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1117,7 +1078,10 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    NextPradoshLink: Schema.Attribute.Component<'shared.link', false> &
+    NextPradoshLink: Schema.Attribute.Component<
+      'shared.related-pradosh',
+      false
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1130,7 +1094,15 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
         };
       }>;
     PradoshBlock: Schema.Attribute.DynamicZone<
-      ['shared.link', 'shared.fa-qs']
+      [
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1187,12 +1159,6 @@ export interface ApiPujaVidhiPujaVidhi extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1215,7 +1181,14 @@ export interface ApiPujaVidhiPujaVidhi extends Struct.CollectionTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     PujaVidhiBlock: Schema.Attribute.DynamicZone<
-      ['shared.link', 'shared.fa-qs']
+      [
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-puja-vidhi',
+        'shared.related-festivals',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1268,12 +1241,6 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1300,7 +1267,10 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    NextPurnima: Schema.Attribute.Component<'shared.link', false> &
+    NextPurnimaLink: Schema.Attribute.Component<
+      'shared.related-purnima',
+      false
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1314,7 +1284,15 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
       }>;
     publishedAt: Schema.Attribute.DateTime;
     PurnimaBlock: Schema.Attribute.DynamicZone<
-      ['shared.link', 'shared.fa-qs']
+      [
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-festivals',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1403,6 +1381,14 @@ export interface ApiTempleTemple extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    FeaturedImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::temple.temple'>;
     Location: Schema.Attribute.Text &
@@ -1430,7 +1416,16 @@ export interface ApiTempleTemple extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    TempleBlock: Schema.Attribute.DynamicZone<['shared.link', 'shared.fa-qs']> &
+    TempleBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-puja-vidhi',
+        'shared.related-ekadashi',
+      ]
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1496,12 +1491,6 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    AltText: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1551,7 +1540,14 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     VratKathaBlock: Schema.Attribute.DynamicZone<
-      ['shared.link', 'shared.fa-qs']
+      [
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-puja-vidhi',
+        'shared.related-festivals',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -2066,7 +2062,6 @@ declare module '@strapi/strapi' {
     export interface ContentTypeSchemas {
       'admin::api-token': AdminApiToken;
       'admin::api-token-permission': AdminApiTokenPermission;
-      'admin::audit-log': AdminAuditLog;
       'admin::permission': AdminPermission;
       'admin::role': AdminRole;
       'admin::session': AdminSession;

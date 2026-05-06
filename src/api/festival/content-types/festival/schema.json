@@ -52,14 +52,6 @@
         "images"
       ]
     },
-    "AltText": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "Date": {
       "type": "date",
       "pluginOptions": {

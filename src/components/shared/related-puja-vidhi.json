@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_puja_vidhis",
+  "info": {
+    "displayName": "RelatedPujaVidhi"
+  },
+  "options": {},
+  "attributes": {
+    "puja_vidhis": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::puja-vidhi.puja-vidhi"
+    }
+  },
+  "config": {}
+}
