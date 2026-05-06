@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_festivals",
+  "info": {
+    "displayName": "RelatedFestivals"
+  },
+  "options": {},
+  "attributes": {
+    "festivals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::festival.festival"
+    }
+  },
+  "config": {}
+}

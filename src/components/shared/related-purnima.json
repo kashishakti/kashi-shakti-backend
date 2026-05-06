@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_purnimas",
+  "info": {
+    "displayName": "RelatedPurnima"
+  },
+  "options": {},
+  "attributes": {
+    "purnimas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::purnima.purnima"
+    }
+  },
+  "config": {}
+}

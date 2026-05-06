@@ -52,14 +52,6 @@
         "images"
       ]
     },
-    "AltText": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "Description": {
       "type": "blocks",
       "pluginOptions": {
@@ -77,7 +69,11 @@
       },
       "components": [
         "shared.link",
-        "shared.fa-qs"
+        "shared.fa-qs",
+        "shared.related-vrat-katha",
+        "shared.related-temples",
+        "shared.related-puja-vidhi",
+        "shared.related-festivals"
       ]
     },
     "SEO": {

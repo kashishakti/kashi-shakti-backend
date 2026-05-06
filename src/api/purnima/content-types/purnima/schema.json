@@ -52,14 +52,6 @@
         "images"
       ]
     },
-    "AltText": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "PurnimaDate": {
       "type": "date",
       "pluginOptions": {
@@ -112,14 +104,14 @@
         }
       }
     },
-    "NextPurnima": {
+    "NextPurnimaLink": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "shared.link",
+      "component": "shared.related-purnima",
       "repeatable": false
     },
     "PurnimaBlock": {
@@ -131,7 +123,12 @@
       },
       "components": [
         "shared.link",
-        "shared.fa-qs"
+        "shared.fa-qs",
+        "shared.related-vrat-katha",
+        "shared.related-temples",
+        "shared.related-purnima",
+        "shared.related-puja-vidhi",
+        "shared.related-festivals"
       ]
     },
     "SEO": {

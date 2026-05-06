@@ -183,6 +183,92 @@ export interface SharedMuhuratTimings extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedRelatedAmavasya extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_amavasyas';
+  info: {
+    displayName: 'RelatedAmavasya';
+  };
+  attributes: {
+    amavasyas: Schema.Attribute.Relation<'oneToMany', 'api::amavasya.amavasya'>;
+  };
+}
+
+export interface SharedRelatedEkadashi extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_ekadashis';
+  info: {
+    displayName: 'RelatedEkadashi';
+  };
+  attributes: {
+    ekadashis: Schema.Attribute.Relation<'oneToMany', 'api::ekadashi.ekadashi'>;
+  };
+}
+
+export interface SharedRelatedFestivals extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_festivals';
+  info: {
+    displayName: 'RelatedFestivals';
+  };
+  attributes: {
+    festivals: Schema.Attribute.Relation<'oneToMany', 'api::festival.festival'>;
+  };
+}
+
+export interface SharedRelatedPradosh extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_pradoshes';
+  info: {
+    displayName: 'RelatedPradosh';
+  };
+  attributes: {
+    pradoshes: Schema.Attribute.Relation<'oneToMany', 'api::pradosh.pradosh'>;
+  };
+}
+
+export interface SharedRelatedPujaVidhi extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_puja_vidhis';
+  info: {
+    displayName: 'RelatedPujaVidhi';
+  };
+  attributes: {
+    puja_vidhis: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::puja-vidhi.puja-vidhi'
+    >;
+  };
+}
+
+export interface SharedRelatedPurnima extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_purnimas';
+  info: {
+    displayName: 'RelatedPurnima';
+  };
+  attributes: {
+    purnimas: Schema.Attribute.Relation<'oneToMany', 'api::purnima.purnima'>;
+  };
+}
+
+export interface SharedRelatedTemples extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_temples';
+  info: {
+    displayName: 'RelatedTemples';
+  };
+  attributes: {
+    temples: Schema.Attribute.Relation<'oneToMany', 'api::temple.temple'>;
+  };
+}
+
+export interface SharedRelatedVratKatha extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_vrat_kathas';
+  info: {
+    displayName: 'RelatedVratKatha';
+  };
+  attributes: {
+    vrat_kathas: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::vrat-katha.vrat-katha'
+    >;
+  };
+}
+
 export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
@@ -217,6 +303,14 @@ declare module '@strapi/strapi' {
       'shared.link': SharedLink;
       'shared.logo-link': SharedLogoLink;
       'shared.muhurat-timings': SharedMuhuratTimings;
+      'shared.related-amavasya': SharedRelatedAmavasya;
+      'shared.related-ekadashi': SharedRelatedEkadashi;
+      'shared.related-festivals': SharedRelatedFestivals;
+      'shared.related-pradosh': SharedRelatedPradosh;
+      'shared.related-puja-vidhi': SharedRelatedPujaVidhi;
+      'shared.related-purnima': SharedRelatedPurnima;
+      'shared.related-temples': SharedRelatedTemples;
+      'shared.related-vrat-katha': SharedRelatedVratKatha;
       'shared.seo': SharedSeo;
     }
   }

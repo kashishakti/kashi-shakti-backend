@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_temples",
+  "info": {
+    "displayName": "RelatedTemples"
+  },
+  "options": {},
+  "attributes": {
+    "temples": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::temple.temple"
+    }
+  },
+  "config": {}
+}
