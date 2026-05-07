@@ -1,3 +1,3 @@
 module.exports = {
-    fields: ['formats', 'name', 'alternativeText'],
+    fields: ['name', 'alternativeText', 'url'],
 };
