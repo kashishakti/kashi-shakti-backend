@@ -4,19 +4,16 @@
  * ekadashi controller
  */
 
-// const { createCoreController } = require('@strapi/strapi').factories;
-
-// module.exports = createCoreController('api::ekadashi.ekadashi');
-
-'use strict';
-
 const { createCoreController } = require('@strapi/strapi').factories;
 
-const media = {
-  fields: ['url', 'formats', 'name'],
-};
+// 🔹 Shared populates
+const media = require('../../../utils/populate/media');
+const seo = require('../../../utils/populate/seo');
+const related = require('../../../utils/populate/related');
+const dynamicZones = require('../../../utils/populate/dynamicZones');
 
 const populate = {
+
   // 🔹 Media
   FeaturedImage: media,
 
@@ -25,68 +22,22 @@ const populate = {
   ParanaTime: true,
   EkadashiTime: true,
 
-  // 🔹 Next Ekadashi (relation inside)
-  NextEkadashiLink: {
-    populate: {
-      ekadashis: true,
-    },
-  },
+  // 🔹 Related
+  NextEkadashiLink: related.relatedEkadashi,
 
   // 🔹 SEO
-  SEO: {
-    populate: {
-      MetaImage: media,
-    },
-  },
+  SEO: seo,
 
-  // 🔹 Dynamic Zone (NOW FULLY CONTROLLED)
-  EkadashiBlock: {
-    on: {
-      'shared.fa-qs': {
-        populate: '*',
-      },
+  // 🔹 Dynamic Zone
+  EkadashiBlock: dynamicZones.commonDynamicZone,
 
-      'shared.link': {
-        populate: '*',
-      },
-
-      'shared.related-ekadashi': {
-        populate: {
-          ekadashis: true,
-        },
-      },
-
-      'shared.related-vrat-katha': {
-        populate: {
-          vrat_kathas: true,
-        },
-      },
-
-      'shared.related-puja-vidhi': {
-        populate: {
-          puja_vidhis: true,
-        },
-      },
-
-      'shared.related-festivals': {
-        populate: {
-          festivals: true,
-        },
-      },
-
-      'shared.related-temples': {
-        populate: {
-          temples: true,
-        },
-      },
-    },
-  },
 };
 
 module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => ({
 
   // 🔹 GET ALL
   async find(ctx) {
+
     const data = await strapi.entityService.findMany(
       'api::ekadashi.ekadashi',
       {
@@ -100,12 +51,15 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
 
   // 🔹 GET BY ID
   async findOne(ctx) {
+
     const { id } = ctx.params;
 
     const data = await strapi.entityService.findOne(
       'api::ekadashi.ekadashi',
       id,
-      { populate }
+      {
+        populate,
+      }
     );
 
     ctx.body = data;
@@ -113,17 +67,20 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
 
   // 🔹 GET BY SLUG
   async findBySlug(ctx) {
+
     const { slug } = ctx.params;
 
     const data = await strapi.entityService.findMany(
       'api::ekadashi.ekadashi',
       {
-        filters: { Slug: slug },
+        filters: {
+          Slug: slug,
+        },
         populate,
       }
     );
 
-    ctx.body = data[0];
+    ctx.body = data[0] || null;
   },
 
 }));
