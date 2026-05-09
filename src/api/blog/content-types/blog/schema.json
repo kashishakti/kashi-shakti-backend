@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "temples",
+  "collectionName": "blogs",
   "info": {
-    "singularName": "temple",
-    "pluralName": "temples",
-    "displayName": "Temples"
+    "singularName": "blog",
+    "pluralName": "blogs",
+    "displayName": "Blogs"
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +16,14 @@
   },
   "attributes": {
     "Title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ShortDescription": {
       "type": "text",
       "pluginOptions": {
         "i18n": {
@@ -32,14 +40,6 @@
       },
       "targetField": "Title"
     },
-    "ShortDescription": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "FeaturedImage": {
       "type": "media",
       "pluginOptions": {
@@ -49,37 +49,16 @@
       },
       "multiple": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
-    "Location": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "blogs"
     },
-    "Deity": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "TempleTimings": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "Description": {
+    "Content": {
       "type": "blocks",
       "pluginOptions": {
         "i18n": {
@@ -87,7 +66,7 @@
         }
       }
     },
-    "TempleBlock": {
+    "BlogsBlock": {
       "type": "dynamiczone",
       "pluginOptions": {
         "i18n": {
@@ -95,12 +74,16 @@
         }
       },
       "components": [
-        "shared.link",
-        "shared.fa-qs",
         "shared.related-vrat-katha",
         "shared.related-temples",
+        "shared.related-purnima",
         "shared.related-puja-vidhi",
+        "shared.related-pradosh",
+        "shared.related-festivals",
         "shared.related-ekadashi",
+        "shared.related-amavasya",
+        "shared.link",
+        "shared.fa-qs",
         "shared.related-blogs"
       ]
     },

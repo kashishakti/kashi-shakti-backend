@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "puja_vidhis",
+  "collectionName": "categories",
   "info": {
-    "singularName": "puja-vidhi",
-    "pluralName": "puja-vidhis",
-    "displayName": "Puja Vidhi"
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Categories"
   },
   "options": {
     "draftAndPublish": true
@@ -32,26 +32,6 @@
       },
       "targetField": "Title"
     },
-    "ShortDescription": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "FeaturedImage": {
-      "type": "media",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "Description": {
       "type": "blocks",
       "pluginOptions": {
@@ -60,22 +40,13 @@
         }
       }
     },
-    "PujaVidhiBlock": {
-      "type": "dynamiczone",
+    "isCommentAllowed": {
+      "type": "boolean",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "components": [
-        "shared.link",
-        "shared.fa-qs",
-        "shared.related-vrat-katha",
-        "shared.related-temples",
-        "shared.related-puja-vidhi",
-        "shared.related-festivals",
-        "shared.related-blogs"
-      ]
+      }
     },
     "SEO": {
       "type": "component",
@@ -86,6 +57,12 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "categories"
     }
   }
 }

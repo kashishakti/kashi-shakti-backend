@@ -87,7 +87,12 @@
       },
       "components": [
         "shared.fa-qs",
-        "shared.link"
+        "shared.link",
+        "shared.related-blogs",
+        "shared.related-temples",
+        "shared.related-vrat-katha",
+        "shared.related-puja-vidhi",
+        "shared.related-festivals"
       ]
     },
     "SEO": {

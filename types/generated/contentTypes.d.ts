@@ -486,7 +486,9 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    FeaturedImage: Schema.Attribute.Media<'images'> &
+    FeaturedImage: Schema.Attribute.Media<
+      'images' | 'videos' | 'audios' | 'files'
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -526,6 +528,156 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
         };
       }>;
     ShortDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Slug: Schema.Attribute.UID<'Title'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
+  collectionName: 'blogs';
+  info: {
+    displayName: 'Blogs';
+    pluralName: 'blogs';
+    singularName: 'blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    BlogsBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+        'shared.related-ekadashi',
+        'shared.related-amavasya',
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-blogs',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
+    Content: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    FeaturedImage: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
+    publishedAt: Schema.Attribute.DateTime;
+    SEO: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ShortDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Slug: Schema.Attribute.UID<'Title'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    displayName: 'Categories';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    isCommentAllowed: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    SEO: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -589,6 +741,7 @@ export interface ApiEkadashiEkadashi extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-temples',
+        'shared.related-blogs',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -717,7 +870,15 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
         };
       }>;
     FestivalBlock: Schema.Attribute.DynamicZone<
-      ['shared.fa-qs', 'shared.link']
+      [
+        'shared.fa-qs',
+        'shared.link',
+        'shared.related-blogs',
+        'shared.related-temples',
+        'shared.related-vrat-katha',
+        'shared.related-puja-vidhi',
+        'shared.related-festivals',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1102,6 +1263,7 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-pradosh',
         'shared.related-festivals',
+        'shared.related-blogs',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1188,6 +1350,7 @@ export interface ApiPujaVidhiPujaVidhi extends Struct.CollectionTypeSchema {
         'shared.related-temples',
         'shared.related-puja-vidhi',
         'shared.related-festivals',
+        'shared.related-blogs',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1292,6 +1455,7 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
         'shared.related-purnima',
         'shared.related-puja-vidhi',
         'shared.related-festivals',
+        'shared.related-blogs',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1424,6 +1588,7 @@ export interface ApiTempleTemple extends Struct.CollectionTypeSchema {
         'shared.related-temples',
         'shared.related-puja-vidhi',
         'shared.related-ekadashi',
+        'shared.related-blogs',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1547,6 +1712,7 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
         'shared.related-temples',
         'shared.related-puja-vidhi',
         'shared.related-festivals',
+        'shared.related-blogs',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -2069,6 +2235,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::amavasya.amavasya': ApiAmavasyaAmavasya;
+      'api::blog.blog': ApiBlogBlog;
+      'api::category.category': ApiCategoryCategory;
       'api::ekadashi.ekadashi': ApiEkadashiEkadashi;
       'api::festival.festival': ApiFestivalFestival;
       'api::global.global': ApiGlobalGlobal;

@@ -49,7 +49,10 @@
       },
       "multiple": false,
       "allowedTypes": [
-        "images"
+        "images",
+        "videos",
+        "audios",
+        "files"
       ]
     },
     "AmavasyaDate": {

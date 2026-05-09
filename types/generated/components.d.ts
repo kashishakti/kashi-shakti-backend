@@ -178,8 +178,8 @@ export interface SharedMuhuratTimings extends Struct.ComponentSchema {
     displayName: 'MuhuratTimings';
   };
   attributes: {
-    EndTime: Schema.Attribute.Time;
-    StartTime: Schema.Attribute.Time;
+    EndTime: Schema.Attribute.DateTime;
+    StartTime: Schema.Attribute.DateTime;
   };
 }
 
@@ -190,6 +190,16 @@ export interface SharedRelatedAmavasya extends Struct.ComponentSchema {
   };
   attributes: {
     amavasyas: Schema.Attribute.Relation<'oneToMany', 'api::amavasya.amavasya'>;
+  };
+}
+
+export interface SharedRelatedBlogs extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_blogs';
+  info: {
+    displayName: 'RelatedBlogs';
+  };
+  attributes: {
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
   };
 }
 
@@ -304,6 +314,7 @@ declare module '@strapi/strapi' {
       'shared.logo-link': SharedLogoLink;
       'shared.muhurat-timings': SharedMuhuratTimings;
       'shared.related-amavasya': SharedRelatedAmavasya;
+      'shared.related-blogs': SharedRelatedBlogs;
       'shared.related-ekadashi': SharedRelatedEkadashi;
       'shared.related-festivals': SharedRelatedFestivals;
       'shared.related-pradosh': SharedRelatedPradosh;
