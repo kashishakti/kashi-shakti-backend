@@ -6,4 +6,82 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::pradosh.pradosh');
+// 🔹 Shared populates
+const media = require('../../../utils/populate/media');
+const seo = require('../../../utils/populate/seo');
+const related = require('../../../utils/populate/related');
+const dynamicZones = require('../../../utils/populate/dynamicZones');
+
+const populate = {
+
+    // 🔹 Media
+    FeaturedImage: media,
+
+    // 🔹 Components
+    HinduMonth: true,
+    Muhurat: true,
+    DayPradoshaTime: true,
+    TrayodashiTithi: true,
+
+    // 🔹 Related
+    NextPradoshLink: related.relatedPradosh,
+
+    // 🔹 SEO
+    SEO: seo,
+
+    // 🔹 Dynamic Zone
+    PradoshBlock: dynamicZones.commonDynamicZone,
+
+};
+
+module.exports = createCoreController('api::pradosh.pradosh', ({ strapi }) => ({
+
+    // 🔹 GET ALL
+    async find(ctx) {
+
+        const data = await strapi.entityService.findMany(
+            'api::pradosh.pradosh',
+            {
+                populate,
+                sort: { Date: 'asc' },
+            }
+        );
+
+        ctx.body = data;
+    },
+
+    // 🔹 GET BY ID
+    async findOne(ctx) {
+
+        const { id } = ctx.params;
+
+        const data = await strapi.entityService.findOne(
+            'api::pradosh.pradosh',
+            id,
+            {
+                populate,
+            }
+        );
+
+        ctx.body = data;
+    },
+
+    // 🔹 GET BY SLUG
+    async findBySlug(ctx) {
+
+        const { slug } = ctx.params;
+
+        const data = await strapi.entityService.findMany(
+            'api::pradosh.pradosh',
+            {
+                filters: {
+                    Slug: slug,
+                },
+                populate,
+            }
+        );
+
+        ctx.body = data[0] || null;
+    },
+
+}));

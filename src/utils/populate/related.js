@@ -36,4 +36,16 @@ module.exports = {
         },
     },
 
+    relatedPradosh: {
+        populate: {
+            pradoshes: true,
+        },
+    },
+
+    relatedPurnima: {
+        populate: {
+            purnimas: true,
+        },
+    },
+
 };

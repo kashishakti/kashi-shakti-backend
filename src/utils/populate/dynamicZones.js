@@ -1,4 +1,5 @@
 const related = require('./related');
+const logoLink = require('./logoLink');
 
 module.exports = {
 
@@ -8,6 +9,8 @@ module.exports = {
             'shared.link': {
                 populate: '*',
             },
+
+            'shared.logo-link': logoLink,
 
             'shared.fa-qs': {
                 populate: '*',
