@@ -40,6 +40,16 @@
         }
       }
     },
+    "Deity": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.deity",
+      "repeatable": false
+    },
     "Date": {
       "type": "date",
       "pluginOptions": {
@@ -68,8 +78,8 @@
         }
       },
       "enum": [
-        "Krishna Ekadashi",
-        "Shukla Ekadashi"
+        "Krishna Paksha",
+        "Shukla Paksha"
       ]
     },
     "EkadashiMonth": {

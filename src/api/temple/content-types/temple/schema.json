@@ -40,6 +40,16 @@
         }
       }
     },
+    "Deity": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.deity",
+      "repeatable": false
+    },
     "FeaturedImage": {
       "type": "media",
       "pluginOptions": {
@@ -56,14 +66,6 @@
       ]
     },
     "Location": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "Deity": {
       "type": "text",
       "pluginOptions": {
         "i18n": {

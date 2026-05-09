@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_deities",
+  "info": {
+    "displayName": "Deity"
+  },
+  "options": {},
+  "attributes": {
+    "Deity": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

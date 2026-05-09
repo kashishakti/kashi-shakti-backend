@@ -109,6 +109,16 @@ export interface SectionTrustBadges extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedDeity extends Struct.ComponentSchema {
+  collectionName: 'components_shared_deities';
+  info: {
+    displayName: 'Deity';
+  };
+  attributes: {
+    Deity: Schema.Attribute.Text;
+  };
+}
+
 export interface SharedFaQs extends Struct.ComponentSchema {
   collectionName: 'components_shared_fa_qs';
   info: {
@@ -308,6 +318,7 @@ declare module '@strapi/strapi' {
       'section.featured-vrat': SectionFeaturedVrat;
       'section.hero': SectionHero;
       'section.trust-badges': SectionTrustBadges;
+      'shared.deity': SharedDeity;
       'shared.fa-qs': SharedFaQs;
       'shared.hindu-month': SharedHinduMonth;
       'shared.link': SharedLink;
