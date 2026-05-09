@@ -7,6 +7,10 @@
 // const { createCoreController } = require('@strapi/strapi').factories;
 
 // module.exports = createCoreController('api::vrat-katha.vrat-katha');
+const media = require('../../../utils/populate/media');
+const seo = require('../../../utils/populate/seo');
+const dynamicZones = require('../../../utils/populate/dynamicZones');
+const related = require('../../../utils/populate/related');
 
 
 'use strict';
@@ -17,52 +21,15 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-const media = {
-  fields: ['url', 'formats', 'name'],
-};
-
 const populate = {
   // 🔹 Media
   FeaturedImage: media,
 
   // 🔹 SEO
-  SEO: {
-    populate: {
-      MetaImage: media,
-    },
-  },
+  SEO: seo,
 
   // 🔹 Dynamic Zone (VratKathaBlock)
-  VratKathaBlock: {
-    on: {
-      'shared.link': {
-        populate: '*',
-      },
-      'shared.fa-qs': {
-        populate: '*',
-      },
-      'shared.related-vrat-katha': {
-        populate: {
-          vrat_kathas: true, // Expands the related Vrat Katha entries
-        },
-      },
-      'shared.related-temples': {
-        populate: {
-          temples: true, // Expands the related Temple entries
-        },
-      },
-      'shared.related-puja-vidhi': {
-        populate: {
-          puja_vidhis: true, // Expands the related Puja Vidhi entries
-        },
-      },
-      'shared.related-festivals': {
-        populate: {
-          festivals: true, // Expands the related Festival entries
-        },
-      },
-    },
-  },
+  VratKathaBlock: dynamicZones.commonDynamicZone,
 };
 
 module.exports = createCoreController('api::vrat-katha.vrat-katha', ({ strapi }) => ({

@@ -1,8 +1,28 @@
+const media = require("./media");
 module.exports = {
 
     relatedEkadashi: {
         populate: {
-            ekadashis: true,
+            ekadashis: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "ShortDescription",
+                    "EkadashiPaksha",
+                    "Date",
+                ],
+                populate: {
+                    FeaturedImage: media,
+
+                    EkadashiTime: true,
+                    ParanaTime: true,
+
+                    EkadashiMonth: {
+                        fields: ["Month"],   // ✅ correct field
+                    },
+                },
+            },
         },
     },
 
@@ -32,10 +52,20 @@ module.exports = {
 
     relatedVratKatha: {
         populate: {
-            vrat_kathas: true,
+            vrat_kathas: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                ],
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
-
     relatedPradosh: {
         populate: {
             pradoshes: true,
