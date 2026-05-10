@@ -34,7 +34,20 @@ module.exports = {
 
     relatedTemples: {
         populate: {
-            temples: true,
+            temples: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                    "Location",
+                    "TempleTimings",
+                ],
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
