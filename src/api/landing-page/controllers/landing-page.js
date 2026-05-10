@@ -30,6 +30,7 @@ const populate = {
   // 🔹 Featured Vrats
   FeaturedVrats: {
     populate: {
+      vrat_kathas: true,
       VratLink: true,
     },
   },
