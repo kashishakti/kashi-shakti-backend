@@ -91,4 +91,10 @@ module.exports = {
         },
     },
 
+    relatedBlogs: {
+        populate: {
+            blogs: true,
+        },
+    },
+
 };

@@ -8,25 +8,25 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 // 🔹 Shared populates
 const dynamicZones = require('../../../utils/populate/dynamicZones');
-const sectionsDynamicZone = dynamicZones.sectionsDynamicZone.on;
+const commonDynamicZone = dynamicZones.commonDynamicZone.on;
 
 
 const populate = {
 
   // 🔹 Trust Badges
-  TrustBadges: sectionsDynamicZone['section.trust-badges'],
+  TrustBadges: commonDynamicZone['section.trust-badges'],
 
   // 🔹 Featured Temples
-  FeaturedTemples: sectionsDynamicZone['section.featured-temples'],
+  FeaturedTemples: commonDynamicZone['section.featured-temples'],
 
   // 🔹 Featured Vrats
-  FeaturedVrats: sectionsDynamicZone['section.featured-vrat'],
+  FeaturedVrats: commonDynamicZone['section.featured-vrat'],
 
   // 🔹 Featured Puja Vidhi
-  FeaturedPujaVidhi: sectionsDynamicZone['section.featured-puja-vidhi'],
+  FeaturedPujaVidhi: commonDynamicZone['section.featured-puja-vidhi'],
 
   // 🔹 Dynamic Zone
-  LandingPageBlock: dynamicZones.sectionsDynamicZone,
+  LandingPageBlock: dynamicZones.commonDynamicZone,
 
 };
 
