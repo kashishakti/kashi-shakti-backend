@@ -21,6 +21,7 @@ const populate = {
   EkadashiMonth: true,
   ParanaTime: true,
   EkadashiTime: true,
+  Deity: true,
 
   // 🔹 Related
   NextEkadashiLink: related.relatedEkadashi,

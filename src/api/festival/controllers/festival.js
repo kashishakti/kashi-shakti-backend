@@ -18,6 +18,7 @@ const populate = {
 
     // 🔹 Components
     HinduMonth: true,
+    Deity: true,
 
     // 🔹 SEO
     SEO: seo,

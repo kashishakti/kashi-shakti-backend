@@ -22,6 +22,7 @@ const populate = {
     Muhurat: true,
     DayPradoshaTime: true,
     TrayodashiTithi: true,
+    Deity: true,
 
     // 🔹 Related
     NextPradoshLink: related.relatedPradosh,

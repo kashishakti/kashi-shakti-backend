@@ -12,6 +12,7 @@ const populate = {
     FeaturedImage: media,
 
     AmavasyaTimings: true,
+    Deity: true,
 
     NextAmavasyaLink: related.relatedAmavasya,
 
@@ -32,6 +33,40 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
         );
 
         ctx.body = data;
+    },
+
+    // 🔹 GET BY ID
+    async findOne(ctx) {
+
+        const { id } = ctx.params;
+
+        const data = await strapi.entityService.findOne(
+            'api::amavasya.amavasya',
+            id,
+            {
+                populate,
+            }
+        );
+
+        ctx.body = data;
+    },
+
+    // 🔹 GET BY SLUG
+    async findBySlug(ctx) {
+
+        const { slug } = ctx.params;
+
+        const data = await strapi.entityService.findMany(
+            'api::amavasya.amavasya',
+            {
+                filters: {
+                    Slug: slug,
+                },
+                populate,
+            }
+        );
+
+        ctx.body = data[0] || null;
     },
 
 }));

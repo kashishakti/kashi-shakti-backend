@@ -20,6 +20,7 @@ const populate = {
     // 🔹 Components
     PurnimaMonth: true,
     PurnimaTimings: true,
+    Deity: true,
 
     // 🔹 Related
     NextPurnimaLink: related.relatedPurnima,
