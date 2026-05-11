@@ -1,5 +1,6 @@
 const related = require('./related');
 const logoLink = require('./logoLink');
+const media = require('./media');
 
 module.exports = {
 
@@ -27,6 +28,47 @@ module.exports = {
             'shared.related-puja-vidhi': related.relatedPujaVidhi,
 
             'shared.related-festivals': related.relatedFestivals,
+
+        },
+    },
+
+    sectionsDynamicZone: {
+        on: {
+
+            'section.hero': {
+                populate: {
+                    HeroImage: media,
+                    HeroLink: true,
+                },
+            },
+
+            'section.trust-badges': {
+                populate: {
+                    image: media,
+                    Link: true,
+                },
+            },
+
+            'section.featured-temples': {
+                populate: {
+                    ...related.relatedTemples.populate,
+                    Link: true,
+                },
+            },
+
+            'section.featured-vrat': {
+                populate: {
+                    ...related.relatedVratKatha.populate,
+                    VratLink: true,
+                },
+            },
+
+            'section.featured-puja-vidhi': {
+                populate: {
+                    ...related.relatedPujaVidhi.populate,
+                    PujaVidhiLink: true,
+                },
+            },
 
         },
     },

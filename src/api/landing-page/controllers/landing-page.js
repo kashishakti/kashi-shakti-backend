@@ -7,55 +7,26 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 // 🔹 Shared populates
-const media = require('../../../utils/populate/media');
+const dynamicZones = require('../../../utils/populate/dynamicZones');
+const sectionsDynamicZone = dynamicZones.sectionsDynamicZone.on;
+
 
 const populate = {
 
   // 🔹 Trust Badges
-  TrustBadges: {
-    populate: {
-      image: media,
-      Link: true,
-    },
-  },
+  TrustBadges: sectionsDynamicZone['section.trust-badges'],
 
   // 🔹 Featured Temples
-  FeaturedTemples: {
-    populate: {
-      temples: true,
-      Link: true,
-    },
-  },
+  FeaturedTemples: sectionsDynamicZone['section.featured-temples'],
 
   // 🔹 Featured Vrats
-  FeaturedVrats: {
-    populate: {
-      vrat_kathas: true,
-      VratLink: true,
-    },
-  },
+  FeaturedVrats: sectionsDynamicZone['section.featured-vrat'],
 
   // 🔹 Featured Puja Vidhi
-  FeaturedPujaVidhi: {
-    populate: {
-      puja_vidhis: true,
-      PujaVidhiLink: true,
-    },
-  },
+  FeaturedPujaVidhi: sectionsDynamicZone['section.featured-puja-vidhi'],
 
   // 🔹 Dynamic Zone
-  LandingPageBlock: {
-    on: {
-
-      'section.hero': {
-        populate: {
-          HeroImage: media,
-          HeroLink: true,
-        },
-      },
-
-    },
-  },
+  LandingPageBlock: dynamicZones.sectionsDynamicZone,
 
 };
 
