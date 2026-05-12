@@ -28,7 +28,11 @@ module.exports = {
 
     relatedAmavasya: {
         populate: {
-            amavasyas: true,
+            amavasyas: {
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
@@ -53,13 +57,21 @@ module.exports = {
 
     relatedFestivals: {
         populate: {
-            festivals: true,
+            festivals: {
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
     relatedPujaVidhi: {
         populate: {
-            puja_vidhis: true,
+            puja_vidhis: {
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
@@ -81,19 +93,31 @@ module.exports = {
     },
     relatedPradosh: {
         populate: {
-            pradoshes: true,
+            pradoshes: {
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
     relatedPurnima: {
         populate: {
-            purnimas: true,
+            purnimas: {
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
     relatedBlogs: {
         populate: {
-            blogs: true,
+            blogs: {
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
         },
     },
 
