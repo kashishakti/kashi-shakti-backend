@@ -32,7 +32,7 @@
       },
       "targetField": "Title"
     },
-    "Description": {
+    "ShortDescription": {
       "type": "text",
       "pluginOptions": {
         "i18n": {

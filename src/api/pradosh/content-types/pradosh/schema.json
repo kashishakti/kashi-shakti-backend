@@ -32,8 +32,16 @@
       },
       "targetField": "Title"
     },
-    "Description": {
+    "ShortDescription": {
       "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "VikramSamvataYear": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true

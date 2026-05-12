@@ -32,6 +32,14 @@
       },
       "targetField": "Title"
     },
+    "ShortDescription": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "Deity": {
       "type": "component",
       "pluginOptions": {
@@ -41,14 +49,6 @@
       },
       "component": "shared.deity",
       "repeatable": false
-    },
-    "ShortDescription": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
     },
     "FeaturedImage": {
       "type": "media",

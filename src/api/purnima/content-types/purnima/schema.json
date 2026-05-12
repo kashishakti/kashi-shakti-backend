@@ -40,6 +40,14 @@
         }
       }
     },
+    "VikramSamvataYear": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "Deity": {
       "type": "component",
       "pluginOptions": {
