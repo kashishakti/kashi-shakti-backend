@@ -11,6 +11,7 @@ module.exports = {
                     "ShortDescription",
                     "EkadashiPaksha",
                     "Date",
+                    "Slug"
                 ],
                 populate: {
                     FeaturedImage: media,
