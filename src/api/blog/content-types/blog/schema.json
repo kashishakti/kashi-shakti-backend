@@ -58,8 +58,8 @@
       "target": "api::category.category",
       "inversedBy": "blogs"
     },
-    "Content": {
-      "type": "blocks",
+    "Description": {
+      "type": "richtext",
       "pluginOptions": {
         "i18n": {
           "localized": true

@@ -99,16 +99,16 @@
       "component": "shared.muhurat-timings",
       "repeatable": false
     },
-    "Notes": {
-      "type": "text",
+    "Description": {
+      "type": "blocks",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "Description": {
-      "type": "blocks",
+    "Notes": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
