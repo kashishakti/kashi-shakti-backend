@@ -16,6 +16,9 @@
     },
     "test1": {
       "type": "boolean"
+    },
+    "TestClassicRichText": {
+      "type": "richtext"
     }
   }
 }
