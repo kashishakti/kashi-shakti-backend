@@ -1146,66 +1146,35 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPagePage extends Struct.CollectionTypeSchema {
-  collectionName: 'pages';
+export interface ApiPolicyPolicy extends Struct.CollectionTypeSchema {
+  collectionName: 'policies';
   info: {
-    displayName: 'Page';
-    pluralName: 'pages';
-    singularName: 'page';
+    displayName: 'Policy';
+    pluralName: 'policies';
+    singularName: 'policy';
   };
   options: {
     draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.RichText &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'>;
-    PageBlocks: Schema.Attribute.DynamicZone<
-      ['shared.logo-link', 'shared.link']
+    Description: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::policy.policy'
     > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+      Schema.Attribute.Private;
+    PolicyBlock: Schema.Attribute.DynamicZone<
+      ['shared.logo-link', 'shared.link']
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    SEO: Schema.Attribute.Component<'shared.seo', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    ShortDescription: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    Slug: Schema.Attribute.UID<'Title'> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    Title: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
+    ShortDescription: Schema.Attribute.Text;
+    Slug: Schema.Attribute.UID<'Title'>;
+    Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -2321,7 +2290,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::menu.menu': ApiMenuMenu;
-      'api::page.page': ApiPagePage;
+      'api::policy.policy': ApiPolicyPolicy;
       'api::pradosh.pradosh': ApiPradoshPradosh;
       'api::puja-vidhi.puja-vidhi': ApiPujaVidhiPujaVidhi;
       'api::purnima.purnima': ApiPurnimaPurnima;
