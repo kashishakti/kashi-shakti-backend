@@ -53,6 +53,10 @@ module.exports = createCoreController('api::puja-vidhi.puja-vidhi', ({ strapi })
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Puja Vidhi with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -71,7 +75,11 @@ module.exports = createCoreController('api::puja-vidhi.puja-vidhi', ({ strapi })
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Puja Vidhi with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));

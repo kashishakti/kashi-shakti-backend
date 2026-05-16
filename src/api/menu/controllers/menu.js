@@ -23,22 +23,26 @@ module.exports = createCoreController('api::menu.menu', ({ strapi }) => ({
             }
         );
 
-        ctx.body = data;
-    },
+    ctx.body = data;
+  },
 
-    // 🔹 GET MENU BY ID
-    async findOne(ctx) {
-        const { id } = ctx.params;
+  // 🔹 GET MENU BY ID
+  async findOne(ctx) {
+    const { id } = ctx.params;
 
-        const data = await strapi.entityService.findOne(
-            'api::menu.menu',
-            id,
-            {
-                populate,
-            }
-        );
+    const data = await strapi.entityService.findOne(
+      'api::menu.menu',
+      id,
+      {
+        populate,
+      }
+    );
 
-        ctx.body = data;
-    },
+    if (!data) {
+      return ctx.notFound(`Menu with id "${id}" not found`);
+    }
+
+    ctx.body = data;
+  },
 
 }));

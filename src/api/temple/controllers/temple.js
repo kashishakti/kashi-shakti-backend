@@ -53,6 +53,10 @@ module.exports = createCoreController('api::temple.temple', ({ strapi }) => ({
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Temple with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -71,7 +75,11 @@ module.exports = createCoreController('api::temple.temple', ({ strapi }) => ({
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Temple with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));

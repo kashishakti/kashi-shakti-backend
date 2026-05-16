@@ -63,6 +63,10 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
       }
     );
 
+    if (!data) {
+      return ctx.notFound(`Ekadashi with id "${id}" not found`);
+    }
+
     ctx.body = data;
   },
 
@@ -81,7 +85,11 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
       }
     );
 
-    ctx.body = data[0] || null;
+    if (!data[0]) {
+      return ctx.notFound(`Ekadashi with slug "${slug}" not found`);
+    }
+
+    ctx.body = data[0];
   },
 
 }));

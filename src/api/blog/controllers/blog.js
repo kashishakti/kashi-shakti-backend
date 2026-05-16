@@ -50,6 +50,10 @@ module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
       { populate }
     );
 
+    if (!data) {
+      return ctx.notFound(`Blog with id "${id}" not found`);
+    }
+
     ctx.body = data;
   },
 
@@ -65,8 +69,12 @@ module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
       }
     );
 
-    // Return the first match or null
-    ctx.body = data[0] || null;
+    // Return the first match or 404
+    if (!data[0]) {
+      return ctx.notFound(`Blog with slug "${slug}" not found`);
+    }
+
+    ctx.body = data[0];
   },
 
 }));

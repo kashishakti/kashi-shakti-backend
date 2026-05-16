@@ -49,6 +49,10 @@ module.exports = createCoreController('api::page.page', ({ strapi }) => ({
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Page with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -67,7 +71,11 @@ module.exports = createCoreController('api::page.page', ({ strapi }) => ({
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Page with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));

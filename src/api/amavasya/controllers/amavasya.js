@@ -48,6 +48,10 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Amavasya with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -66,7 +70,11 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Amavasya with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));

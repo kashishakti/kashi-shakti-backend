@@ -62,6 +62,10 @@ module.exports = createCoreController('api::purnima.purnima', ({ strapi }) => ({
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Purnima with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -80,7 +84,11 @@ module.exports = createCoreController('api::purnima.purnima', ({ strapi }) => ({
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Purnima with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));

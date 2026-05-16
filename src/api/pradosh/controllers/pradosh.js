@@ -64,6 +64,10 @@ module.exports = createCoreController('api::pradosh.pradosh', ({ strapi }) => ({
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Pradosh with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -82,7 +86,11 @@ module.exports = createCoreController('api::pradosh.pradosh', ({ strapi }) => ({
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Pradosh with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));

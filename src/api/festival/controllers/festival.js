@@ -66,6 +66,10 @@ module.exports = createCoreController('api::festival.festival', ({ strapi }) => 
             }
         );
 
+        if (!data) {
+            return ctx.notFound(`Festival with id "${id}" not found`);
+        }
+
         ctx.body = data;
     },
 
@@ -84,7 +88,11 @@ module.exports = createCoreController('api::festival.festival', ({ strapi }) => 
             }
         );
 
-        ctx.body = data[0] || null;
+        if (!data[0]) {
+            return ctx.notFound(`Festival with slug "${slug}" not found`);
+        }
+
+        ctx.body = data[0];
     },
 
 }));
