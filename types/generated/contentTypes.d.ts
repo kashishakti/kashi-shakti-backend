@@ -1724,7 +1724,19 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::vrat-katha.vrat-katha'
     >;
+    ObservanceEvent: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
+    RecountedBy: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     SEO: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1744,6 +1756,12 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
         };
       }>;
     Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ToldTo: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
