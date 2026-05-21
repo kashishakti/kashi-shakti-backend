@@ -48,6 +48,18 @@
         }
       }
     },
+    "TrayodashiPaksha": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "enum": [
+        "Shukla Trayodashi",
+        "Krishna Trayodashi"
+      ]
+    },
     "Deity": {
       "type": "component",
       "pluginOptions": {

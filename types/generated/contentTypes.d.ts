@@ -1307,6 +1307,14 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    TrayodashiPaksha: Schema.Attribute.Enumeration<
+      ['Shukla Trayodashi', 'Krishna Trayodashi']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     TrayodashiTithi: Schema.Attribute.Component<
       'shared.muhurat-timings',
       false
