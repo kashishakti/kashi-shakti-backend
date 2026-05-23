@@ -505,12 +505,6 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::amavasya.amavasya'
     >;
-    MoonriseTime: Schema.Attribute.DateTime &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     NextAmavasyaLink: Schema.Attribute.Component<
       'shared.related-amavasya',
       false

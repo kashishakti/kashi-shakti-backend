@@ -81,14 +81,6 @@
         }
       }
     },
-    "MoonriseTime": {
-      "type": "datetime",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "AmavasyaTimings": {
       "type": "component",
       "pluginOptions": {
