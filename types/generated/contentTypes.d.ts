@@ -505,7 +505,7 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::amavasya.amavasya'
     >;
-    MoonriseTime: Schema.Attribute.Time &
+    MoonriseTime: Schema.Attribute.DateTime &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1467,7 +1467,7 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::purnima.purnima'
     >;
-    MoonriseTime: Schema.Attribute.Time &
+    MoonriseTime: Schema.Attribute.DateTime &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

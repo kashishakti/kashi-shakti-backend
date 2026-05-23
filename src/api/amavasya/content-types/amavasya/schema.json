@@ -82,7 +82,7 @@
       }
     },
     "MoonriseTime": {
-      "type": "time",
+      "type": "datetime",
       "pluginOptions": {
         "i18n": {
           "localized": true
