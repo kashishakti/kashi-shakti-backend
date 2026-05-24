@@ -430,6 +430,53 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAartiAarti extends Struct.CollectionTypeSchema {
+  collectionName: 'aartis';
+  info: {
+    displayName: 'Aarti';
+    pluralName: 'aartis';
+    singularName: 'aarti';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AartiBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+        'shared.related-ekadashi',
+        'shared.related-blogs',
+        'shared.related-amavasya',
+        'shared.fa-qs',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Deity: Schema.Attribute.Component<'shared.deity', false>;
+    Description: Schema.Attribute.RichText;
+    FeaturedImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::aarti.aarti'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
+    ShortDescription: Schema.Attribute.Text;
+    Slug: Schema.Attribute.UID<'Title'>;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
   collectionName: 'amavasyas';
   info: {
@@ -455,6 +502,7 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-amavasya',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -586,6 +634,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
         'shared.link',
         'shared.fa-qs',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -754,6 +803,7 @@ export interface ApiEkadashiEkadashi extends Struct.CollectionTypeSchema {
         'shared.related-festivals',
         'shared.related-temples',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -902,6 +952,7 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
         'shared.related-vrat-katha',
         'shared.related-puja-vidhi',
         'shared.related-festivals',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1269,6 +1320,7 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
         'shared.related-pradosh',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1382,6 +1434,7 @@ export interface ApiPujaVidhiPujaVidhi extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1493,6 +1546,7 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1632,6 +1686,7 @@ export interface ApiTempleTemple extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-ekadashi',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1781,6 +1836,7 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -2302,6 +2358,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::aarti.aarti': ApiAartiAarti;
       'api::amavasya.amavasya': ApiAmavasyaAmavasya;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;

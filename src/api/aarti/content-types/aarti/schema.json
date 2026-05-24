@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "aartis",
+  "info": {
+    "singularName": "aarti",
+    "pluralName": "aartis",
+    "displayName": "Aarti"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "ShortDescription": {
+      "type": "text"
+    },
+    "FeaturedImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "SEO": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false
+    },
+    "Deity": {
+      "type": "component",
+      "component": "shared.deity",
+      "repeatable": false
+    },
+    "AartiBlock": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.related-vrat-katha",
+        "shared.related-temples",
+        "shared.related-purnima",
+        "shared.related-puja-vidhi",
+        "shared.related-pradosh",
+        "shared.related-festivals",
+        "shared.related-ekadashi",
+        "shared.related-blogs",
+        "shared.related-amavasya",
+        "shared.fa-qs"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_aartis",
+  "info": {
+    "displayName": "RelatedAarti"
+  },
+  "options": {},
+  "attributes": {
+    "aartis": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::aarti.aarti"
+    }
+  },
+  "config": {}
+}
