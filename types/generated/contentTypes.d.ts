@@ -430,6 +430,53 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAartiAarti extends Struct.CollectionTypeSchema {
+  collectionName: 'aartis';
+  info: {
+    displayName: 'Aarti';
+    pluralName: 'aartis';
+    singularName: 'aarti';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AartiBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+        'shared.related-ekadashi',
+        'shared.related-blogs',
+        'shared.related-amavasya',
+        'shared.fa-qs',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Deity: Schema.Attribute.Component<'shared.deity', false>;
+    Description: Schema.Attribute.RichText;
+    FeaturedImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::aarti.aarti'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
+    ShortDescription: Schema.Attribute.Text;
+    Slug: Schema.Attribute.UID<'Title'>;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
   collectionName: 'amavasyas';
   info: {
@@ -455,6 +502,7 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-amavasya',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -463,6 +511,12 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
         };
       }>;
     AmavasyaDate: Schema.Attribute.Date &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    AmavasyaMonth: Schema.Attribute.Component<'shared.hindu-month', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -505,12 +559,6 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::amavasya.amavasya'
     >;
-    MoonriseTime: Schema.Attribute.Time &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     NextAmavasyaLink: Schema.Attribute.Component<
       'shared.related-amavasya',
       false
@@ -592,6 +640,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
         'shared.link',
         'shared.fa-qs',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -760,6 +809,7 @@ export interface ApiEkadashiEkadashi extends Struct.CollectionTypeSchema {
         'shared.related-festivals',
         'shared.related-temples',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -908,6 +958,7 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
         'shared.related-vrat-katha',
         'shared.related-puja-vidhi',
         'shared.related-festivals',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1146,66 +1197,35 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPagePage extends Struct.CollectionTypeSchema {
-  collectionName: 'pages';
+export interface ApiPolicyPolicy extends Struct.CollectionTypeSchema {
+  collectionName: 'policies';
   info: {
-    displayName: 'Page';
-    pluralName: 'pages';
-    singularName: 'page';
+    displayName: 'Policy';
+    pluralName: 'policies';
+    singularName: 'policy';
   };
   options: {
     draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.RichText &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'>;
-    PageBlocks: Schema.Attribute.DynamicZone<
-      ['shared.logo-link', 'shared.link']
+    Description: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::policy.policy'
     > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+      Schema.Attribute.Private;
+    PolicyBlock: Schema.Attribute.DynamicZone<
+      ['shared.logo-link', 'shared.link']
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    SEO: Schema.Attribute.Component<'shared.seo', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    ShortDescription: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    Slug: Schema.Attribute.UID<'Title'> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    Title: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    SEO: Schema.Attribute.Component<'shared.seo', false>;
+    ShortDescription: Schema.Attribute.Text;
+    Slug: Schema.Attribute.UID<'Title'>;
+    Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1306,6 +1326,7 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
         'shared.related-pradosh',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1333,6 +1354,14 @@ export interface ApiPradoshPradosh extends Struct.CollectionTypeSchema {
         };
       }>;
     Title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    TrayodashiPaksha: Schema.Attribute.Enumeration<
+      ['Shukla Trayodashi', 'Krishna Trayodashi']
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1411,6 +1440,7 @@ export interface ApiPujaVidhiPujaVidhi extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1490,7 +1520,7 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::purnima.purnima'
     >;
-    MoonriseTime: Schema.Attribute.Time &
+    MoonriseTime: Schema.Attribute.DateTime &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1522,6 +1552,7 @@ export interface ApiPurnimaPurnima extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1661,6 +1692,7 @@ export interface ApiTempleTemple extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-ekadashi',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1755,7 +1787,19 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::vrat-katha.vrat-katha'
     >;
+    ObservanceEvent: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
+    RecountedBy: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     SEO: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1780,6 +1824,12 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    ToldTo: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1792,6 +1842,7 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
         'shared.related-puja-vidhi',
         'shared.related-festivals',
         'shared.related-blogs',
+        'shared.related-aarti',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -2313,6 +2364,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::aarti.aarti': ApiAartiAarti;
       'api::amavasya.amavasya': ApiAmavasyaAmavasya;
       'api::blog.blog': ApiBlogBlog;
       'api::category.category': ApiCategoryCategory;
@@ -2321,7 +2373,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::menu.menu': ApiMenuMenu;
-      'api::page.page': ApiPagePage;
+      'api::policy.policy': ApiPolicyPolicy;
       'api::pradosh.pradosh': ApiPradoshPradosh;
       'api::puja-vidhi.puja-vidhi': ApiPujaVidhiPujaVidhi;
       'api::purnima.purnima': ApiPurnimaPurnima;

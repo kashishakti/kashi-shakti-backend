@@ -48,6 +48,16 @@
         }
       }
     },
+    "AmavasyaMonth": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.hindu-month",
+      "repeatable": false
+    },
     "Deity": {
       "type": "component",
       "pluginOptions": {
@@ -75,14 +85,6 @@
     },
     "AmavasyaDate": {
       "type": "date",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "MoonriseTime": {
-      "type": "time",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -139,7 +141,8 @@
         "shared.related-temples",
         "shared.related-puja-vidhi",
         "shared.related-festivals",
-        "shared.related-amavasya"
+        "shared.related-amavasya",
+        "shared.related-aarti"
       ]
     },
     "SEO": {

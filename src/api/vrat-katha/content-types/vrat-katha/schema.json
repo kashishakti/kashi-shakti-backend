@@ -70,6 +70,30 @@
         }
       }
     },
+    "RecountedBy": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ToldTo": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ObservanceEvent": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "VratKathaBlock": {
       "type": "dynamiczone",
       "pluginOptions": {
@@ -84,7 +108,8 @@
         "shared.related-temples",
         "shared.related-puja-vidhi",
         "shared.related-festivals",
-        "shared.related-blogs"
+        "shared.related-blogs",
+        "shared.related-aarti"
       ]
     },
     "SEO": {
