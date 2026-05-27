@@ -32,6 +32,7 @@ module.exports = {
             amavasyas: {
                 populate: {
                     FeaturedImage: media,
+                    AmavasyaTimings: true,
                 },
             },
         },
@@ -107,6 +108,7 @@ module.exports = {
             purnimas: {
                 populate: {
                     FeaturedImage: media,
+                    PurnimaMonth: true,
                 },
             },
         },
