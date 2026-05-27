@@ -516,6 +516,12 @@ export interface ApiAmavasyaAmavasya extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    AmavasyaMonth: Schema.Attribute.Component<'shared.hindu-month', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     AmavasyaTimings: Schema.Attribute.Component<
       'shared.muhurat-timings',
       false

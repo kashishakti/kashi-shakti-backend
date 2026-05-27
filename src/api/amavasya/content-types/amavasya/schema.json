@@ -48,6 +48,16 @@
         }
       }
     },
+    "AmavasyaMonth": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.hindu-month",
+      "repeatable": false
+    },
     "Deity": {
       "type": "component",
       "pluginOptions": {
