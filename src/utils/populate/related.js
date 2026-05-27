@@ -30,8 +30,20 @@ module.exports = {
     relatedAmavasya: {
         populate: {
             amavasyas: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                    "VikramSamvataYear",
+                    "AmavasyaDate",
+                    "Notes",
+                ],
                 populate: {
                     FeaturedImage: media,
+                    Deity: true,
+                    AmavasyaMonth: true,
                     AmavasyaTimings: true,
                 },
             },
@@ -106,9 +118,22 @@ module.exports = {
     relatedPurnima: {
         populate: {
             purnimas: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                    "VikramSamvataYear",
+                    "PurnimaDate",
+                    "MoonriseTime",
+                    "Notes",
+                ],
                 populate: {
                     FeaturedImage: media,
+                    Deity: true,
                     PurnimaMonth: true,
+                    PurnimaTimings: true,
                 },
             },
         },

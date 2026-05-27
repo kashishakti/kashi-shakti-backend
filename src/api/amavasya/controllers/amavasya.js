@@ -11,6 +11,7 @@ const populate = {
 
     FeaturedImage: media,
 
+    AmavasyaMonth: true,
     AmavasyaTimings: true,
     Deity: true,
 
