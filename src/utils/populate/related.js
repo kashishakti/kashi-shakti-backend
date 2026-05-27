@@ -108,8 +108,24 @@ module.exports = {
     relatedPradosh: {
         populate: {
             pradoshes: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                    "VikramSamvataYear",
+                    "TrayodashiPaksha",
+                    "Date",
+                    "Notes",
+                ],
                 populate: {
                     FeaturedImage: media,
+                    Deity: true,
+                    HinduMonth: true,
+                    Muhurat: true,
+                    DayPradoshaTime: true,
+                    TrayodashiTithi: true,
                 },
             },
         },
