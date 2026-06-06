@@ -998,6 +998,18 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::festival.festival'
     >;
+    MuhuratBeginLabel: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    MuhuratEndLabel: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
