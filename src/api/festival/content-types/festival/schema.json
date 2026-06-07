@@ -58,18 +58,6 @@
       "component": "shared.muhurat-timings",
       "repeatable": false
     },
-    "FestivalPaksha": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "enum": [
-        "Shukla",
-        "Krishna"
-      ]
-    },
     "Deity": {
       "type": "component",
       "pluginOptions": {
@@ -118,18 +106,6 @@
         }
       }
     },
-    "City": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "enum": [
-        "Kashi",
-        "Ujjain"
-      ]
-    },
     "FestivalBlock": {
       "type": "dynamiczone",
       "pluginOptions": {
@@ -167,6 +143,22 @@
       }
     },
     "MuhuratEndLabel": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "FestivalPaksha": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "FamousCity": {
       "type": "string",
       "pluginOptions": {
         "i18n": {

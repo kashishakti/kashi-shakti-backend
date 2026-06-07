@@ -922,12 +922,6 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    City: Schema.Attribute.Enumeration<['Kashi', 'Ujjain']> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -944,6 +938,12 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
         };
       }>;
     Description: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FamousCity: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -972,7 +972,7 @@ export interface ApiFestivalFestival extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    FestivalPaksha: Schema.Attribute.Enumeration<['Shukla', 'Krishna']> &
+    FestivalPaksha: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
