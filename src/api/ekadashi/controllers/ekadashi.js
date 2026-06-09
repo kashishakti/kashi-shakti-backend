@@ -6,33 +6,21 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-// 🔹 Shared populates
 const media = require('../../../utils/populate/media');
 const seo = require('../../../utils/populate/seo');
 const related = require('../../../utils/populate/related');
 const dynamicZones = require('../../../utils/populate/dynamicZones');
-const { getPagination, buildPaginationMeta } = require('../../../utils/pagination');
+const { getPagination, setPaginationHeaders } = require('../../../utils/pagination');
 
 const populate = {
-
-  // 🔹 Media
   FeaturedImage: media,
-
-  // 🔹 Components
   EkadashiMonth: true,
   ParanaTime: true,
   EkadashiTime: true,
   Deity: true,
-
-  // 🔹 Related
   NextEkadashiLink: related.relatedEkadashi,
-
-  // 🔹 SEO
   SEO: seo,
-
-  // 🔹 Dynamic Zone
   EkadashiBlock: dynamicZones.commonDynamicZone,
-
 };
 
 module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => ({
@@ -41,6 +29,12 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
   async find(ctx) {
 
     const { year, month } = ctx.query;
+
+    // month without year is meaningless — reject it explicitly
+    if (month && !year) {
+      return ctx.badRequest('`month` requires `year` to also be specified. Example: ?year=2025&month=11');
+    }
+
     const { page, pageSize, start, limit } = getPagination(ctx);
 
     const pad = (n) => String(n).padStart(2, '0');
@@ -54,7 +48,6 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
       }
 
       if (month) {
-        // 🔹 Year + Month → filter to that specific month
         const m = parseInt(month, 10);
 
         if (isNaN(m) || m < 1 || m > 12) {
@@ -64,77 +57,42 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
         const lastDay = new Date(y, m, 0).getDate();
 
         dateFilter = {
-          Date: {
-            $gte: `${y}-${pad(m)}-01`,
-            $lte: `${y}-${pad(m)}-${pad(lastDay)}`,
-          },
+          Date: { $gte: `${y}-${pad(m)}-01`, $lte: `${y}-${pad(m)}-${pad(lastDay)}` },
         };
 
       } else {
-        // 🔹 Year only → filter to the full year
         dateFilter = {
-          Date: {
-            $gte: `${y}-01-01`,
-            $lte: `${y}-12-31`,
-          },
+          Date: { $gte: `${y}-01-01`, $lte: `${y}-12-31` },
         };
       }
     }
 
     const [data, total] = await Promise.all([
       strapi.entityService.findMany('api::ekadashi.ekadashi', {
-        filters: dateFilter,
-        populate,
-        sort:  { Date: 'asc' },
-        start,
-        limit,
+        filters: dateFilter, populate, sort: { Date: 'asc' }, start, limit,
       }),
-      strapi.entityService.count('api::ekadashi.ekadashi', {
-        filters: dateFilter,
-      }),
+      strapi.entityService.count('api::ekadashi.ekadashi', { filters: dateFilter }),
     ]);
 
-    ctx.body = {
-      data,
-      pagination: buildPaginationMeta(page, pageSize, total),
-    };
+    setPaginationHeaders(ctx, page, pageSize, total);
+    ctx.body = data;
   },
 
   // 🔹 GET BY ID
   async findOne(ctx) {
-
     const { id } = ctx.params;
-
-    const data = await strapi.entityService.findOne(
-      'api::ekadashi.ekadashi',
-      id,
-      { populate }
-    );
-
-    if (!data) {
-      return ctx.notFound(`Ekadashi with id "${id}" not found`);
-    }
-
+    const data = await strapi.entityService.findOne('api::ekadashi.ekadashi', id, { populate });
+    if (!data) return ctx.notFound(`Ekadashi with id "${id}" not found`);
     ctx.body = data;
   },
 
   // 🔹 GET BY SLUG
   async findBySlug(ctx) {
-
     const { slug } = ctx.params;
-
-    const data = await strapi.entityService.findMany(
-      'api::ekadashi.ekadashi',
-      {
-        filters: { Slug: slug },
-        populate,
-      }
-    );
-
-    if (!data[0]) {
-      return ctx.notFound(`Ekadashi with slug "${slug}" not found`);
-    }
-
+    const data = await strapi.entityService.findMany('api::ekadashi.ekadashi', {
+      filters: { Slug: slug }, populate,
+    });
+    if (!data[0]) return ctx.notFound(`Ekadashi with slug "${slug}" not found`);
     ctx.body = data[0];
   },
 

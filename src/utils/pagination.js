@@ -3,15 +3,14 @@
 /**
  * Shared pagination helper.
  *
- * Reads `?page=` and `?pageSize=` from ctx.query and returns
- * { page, pageSize, start, limit } ready for entityService.findMany().
+ * Reads `?page=` and `?pageSize=` from ctx.query.
  *
  * @param {object} ctx  - Koa context
  * @param {number} [defaultPageSize=10]
  */
 const getPagination = (ctx, defaultPageSize = 10) => {
-  const page     = Math.max(1, parseInt(ctx.query.page     ?? 1,               10));
-  const pageSize = Math.max(1, parseInt(ctx.query.pageSize ?? defaultPageSize,  10));
+  const page     = Math.max(1, parseInt(ctx.query.page     ?? 1,              10));
+  const pageSize = Math.max(1, parseInt(ctx.query.pageSize ?? defaultPageSize, 10));
 
   return {
     page,
@@ -22,17 +21,22 @@ const getPagination = (ctx, defaultPageSize = 10) => {
 };
 
 /**
- * Builds the standard pagination meta object to include in responses.
+ * Sets pagination metadata as response headers.
+ * Make sure to expose these in your CORS config:
+ *   X-Total-Count, X-Page, X-Page-Size, X-Page-Count
  *
+ * @param {object} ctx
  * @param {number} page
  * @param {number} pageSize
  * @param {number} total
  */
-const buildPaginationMeta = (page, pageSize, total) => ({
-  page,
-  pageSize,
-  total,
-  pageCount: Math.ceil(total / pageSize),
-});
+const setPaginationHeaders = (ctx, page, pageSize, total) => {
+  const pageCount = Math.ceil(total / pageSize);
 
-module.exports = { getPagination, buildPaginationMeta };
+  ctx.set('X-Page',        String(page));
+  ctx.set('X-Page-Size',   String(pageSize));
+  ctx.set('X-Total-Count', String(total));
+  ctx.set('X-Page-Count',  String(pageCount));
+};
+
+module.exports = { getPagination, setPaginationHeaders };
