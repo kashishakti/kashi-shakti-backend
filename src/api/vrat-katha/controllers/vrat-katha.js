@@ -1,18 +1,3 @@
-// 'use strict';
-
-// /**
-//  * vrat-katha controller
-//  */
-
-// const { createCoreController } = require('@strapi/strapi').factories;
-
-// module.exports = createCoreController('api::vrat-katha.vrat-katha');
-const media = require('../../../utils/populate/media');
-const seo = require('../../../utils/populate/seo');
-const dynamicZones = require('../../../utils/populate/dynamicZones');
-const related = require('../../../utils/populate/related');
-
-
 'use strict';
 
 /**
@@ -21,66 +6,50 @@ const related = require('../../../utils/populate/related');
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
+const media = require('../../../utils/populate/media');
+const seo = require('../../../utils/populate/seo');
+const dynamicZones = require('../../../utils/populate/dynamicZones');
+const { getPagination, buildPaginationMeta } = require('../../../utils/pagination');
+
 const populate = {
-  // 🔹 Media
   FeaturedImage: media,
-
-  // 🔹 SEO
   SEO: seo,
-
-  // 🔹 Dynamic Zone (VratKathaBlock)
   VratKathaBlock: dynamicZones.commonDynamicZone,
 };
 
 module.exports = createCoreController('api::vrat-katha.vrat-katha', ({ strapi }) => ({
 
-  // 🔹 GET ALL
+  // 🔹 GET ALL (paginated)
   async find(ctx) {
-    const data = await strapi.entityService.findMany(
-      'api::vrat-katha.vrat-katha',
-      {
+    const { page, pageSize, start, limit } = getPagination(ctx);
+    const [data, total] = await Promise.all([
+      strapi.entityService.findMany('api::vrat-katha.vrat-katha', {
         populate,
         sort: { createdAt: 'desc' },
-      }
-    );
-
-    ctx.body = data;
+        start,
+        limit,
+      }),
+      strapi.entityService.count('api::vrat-katha.vrat-katha'),
+    ]);
+    ctx.body = { data, pagination: buildPaginationMeta(page, pageSize, total) };
   },
 
   // 🔹 GET BY ID
   async findOne(ctx) {
     const { id } = ctx.params;
-
-    const data = await strapi.entityService.findOne(
-      'api::vrat-katha.vrat-katha',
-      id,
-      { populate }
-    );
-
-    if (!data) {
-      return ctx.notFound(`Vrat Katha with id "${id}" not found`);
-    }
-
+    const data = await strapi.entityService.findOne('api::vrat-katha.vrat-katha', id, { populate });
+    if (!data) return ctx.notFound(`Vrat Katha with id "${id}" not found`);
     ctx.body = data;
   },
 
-  // 🔹 GET BY SLUG (Custom Route)
+  // 🔹 GET BY SLUG
   async findBySlug(ctx) {
     const { slug } = ctx.params;
-
-    const data = await strapi.entityService.findMany(
-      'api::vrat-katha.vrat-katha',
-      {
-        filters: { Slug: slug },
-        populate,
-      }
-    );
-
-    // Return the first match or 404
-    if (!data[0]) {
-      return ctx.notFound(`Vrat Katha with slug "${slug}" not found`);
-    }
-
+    const data = await strapi.entityService.findMany('api::vrat-katha.vrat-katha', {
+      filters: { Slug: slug },
+      populate,
+    });
+    if (!data[0]) return ctx.notFound(`Vrat Katha with slug "${slug}" not found`);
     ctx.body = data[0];
   },
 

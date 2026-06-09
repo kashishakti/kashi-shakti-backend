@@ -6,6 +6,7 @@ const media = require('../../../utils/populate/media');
 const seo = require('../../../utils/populate/seo');
 const dynamicZones = require('../../../utils/populate/dynamicZones');
 const related = require('../../../utils/populate/related');
+const { getPagination, buildPaginationMeta } = require('../../../utils/pagination');
 
 const populate = {
 
@@ -25,15 +26,25 @@ const populate = {
 
 module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => ({
 
+    // 🔹 GET ALL (paginated)
     async find(ctx) {
-        const data = await strapi.entityService.findMany(
-            'api::amavasya.amavasya',
-            {
-                populate,
-            }
-        );
 
-        ctx.body = data;
+        const { page, pageSize, start, limit } = getPagination(ctx);
+
+        const [data, total] = await Promise.all([
+            strapi.entityService.findMany('api::amavasya.amavasya', {
+                populate,
+                sort: { AmavasyaDate: 'asc' },
+                start,
+                limit,
+            }),
+            strapi.entityService.count('api::amavasya.amavasya'),
+        ]);
+
+        ctx.body = {
+            data,
+            pagination: buildPaginationMeta(page, pageSize, total),
+        };
     },
 
     // 🔹 GET BY ID
@@ -44,9 +55,7 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
         const data = await strapi.entityService.findOne(
             'api::amavasya.amavasya',
             id,
-            {
-                populate,
-            }
+            { populate }
         );
 
         if (!data) {
@@ -64,9 +73,7 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
         const data = await strapi.entityService.findMany(
             'api::amavasya.amavasya',
             {
-                filters: {
-                    Slug: slug,
-                },
+                filters: { Slug: slug },
                 populate,
             }
         );

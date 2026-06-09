@@ -5,6 +5,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 const media = require('../../../utils/populate/media');
 const seo = require('../../../utils/populate/seo');
 const dynamicZones = require('../../../utils/populate/dynamicZones');
+const { getPagination, buildPaginationMeta } = require('../../../utils/pagination');
 
 const populate = {
 
@@ -20,16 +21,24 @@ const populate = {
 
 module.exports = createCoreController('api::aarti.aarti', ({ strapi }) => ({
 
-    // 🔹 GET ALL
+    // 🔹 GET ALL (paginated)
     async find(ctx) {
-        const data = await strapi.entityService.findMany(
-            'api::aarti.aarti',
-            {
-                populate,
-            }
-        );
 
-        ctx.body = data;
+        const { page, pageSize, start, limit } = getPagination(ctx);
+
+        const [data, total] = await Promise.all([
+            strapi.entityService.findMany('api::aarti.aarti', {
+                populate,
+                start,
+                limit,
+            }),
+            strapi.entityService.count('api::aarti.aarti'),
+        ]);
+
+        ctx.body = {
+            data,
+            pagination: buildPaginationMeta(page, pageSize, total),
+        };
     },
 
     // 🔹 GET BY ID
@@ -40,9 +49,7 @@ module.exports = createCoreController('api::aarti.aarti', ({ strapi }) => ({
         const data = await strapi.entityService.findOne(
             'api::aarti.aarti',
             id,
-            {
-                populate,
-            }
+            { populate }
         );
 
         if (!data) {
@@ -60,9 +67,7 @@ module.exports = createCoreController('api::aarti.aarti', ({ strapi }) => ({
         const data = await strapi.entityService.findMany(
             'api::aarti.aarti',
             {
-                filters: {
-                    Slug: slug,
-                },
+                filters: { Slug: slug },
                 populate,
             }
         );

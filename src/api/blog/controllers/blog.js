@@ -1,8 +1,3 @@
-const media = require('../../../utils/populate/media');
-const seo = require('../../../utils/populate/seo');
-const dynamicZones = require('../../../utils/populate/dynamicZones');
-const related = require('../../../utils/populate/related');
-
 'use strict';
 
 /**
@@ -10,6 +5,12 @@ const related = require('../../../utils/populate/related');
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
+
+const media = require('../../../utils/populate/media');
+const seo = require('../../../utils/populate/seo');
+const dynamicZones = require('../../../utils/populate/dynamicZones');
+const related = require('../../../utils/populate/related');
+const { getPagination, buildPaginationMeta } = require('../../../utils/pagination');
 
 const populate = {
   // 🔹 Media
@@ -27,17 +28,25 @@ const populate = {
 
 module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
 
-  // 🔹 GET ALL
+  // 🔹 GET ALL (paginated)
   async find(ctx) {
-    const data = await strapi.entityService.findMany(
-      'api::blog.blog',
-      {
+
+    const { page, pageSize, start, limit } = getPagination(ctx);
+
+    const [data, total] = await Promise.all([
+      strapi.entityService.findMany('api::blog.blog', {
         populate,
         sort: { createdAt: 'desc' },
-      }
-    );
+        start,
+        limit,
+      }),
+      strapi.entityService.count('api::blog.blog'),
+    ]);
 
-    ctx.body = data;
+    ctx.body = {
+      data,
+      pagination: buildPaginationMeta(page, pageSize, total),
+    };
   },
 
   // 🔹 GET BY ID
@@ -69,7 +78,6 @@ module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
       }
     );
 
-    // Return the first match or 404
     if (!data[0]) {
       return ctx.notFound(`Blog with slug "${slug}" not found`);
     }

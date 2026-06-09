@@ -10,6 +10,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 const media = require('../../../utils/populate/media');
 const seo = require('../../../utils/populate/seo');
 const dynamicZones = require('../../../utils/populate/dynamicZones');
+const { getPagination, buildPaginationMeta } = require('../../../utils/pagination');
 
 const populate = {
 
@@ -39,18 +40,25 @@ const populate = {
 
 module.exports = createCoreController('api::festival.festival', ({ strapi }) => ({
 
-    // 🔹 GET ALL
+    // 🔹 GET ALL (paginated)
     async find(ctx) {
 
-        const data = await strapi.entityService.findMany(
-            'api::festival.festival',
-            {
+        const { page, pageSize, start, limit } = getPagination(ctx);
+
+        const [data, total] = await Promise.all([
+            strapi.entityService.findMany('api::festival.festival', {
                 populate,
                 sort: { Date: 'asc' },
-            }
-        );
+                start,
+                limit,
+            }),
+            strapi.entityService.count('api::festival.festival'),
+        ]);
 
-        ctx.body = data;
+        ctx.body = {
+            data,
+            pagination: buildPaginationMeta(page, pageSize, total),
+        };
     },
 
     // 🔹 GET BY ID
@@ -61,9 +69,7 @@ module.exports = createCoreController('api::festival.festival', ({ strapi }) => 
         const data = await strapi.entityService.findOne(
             'api::festival.festival',
             id,
-            {
-                populate,
-            }
+            { populate }
         );
 
         if (!data) {
@@ -81,9 +87,7 @@ module.exports = createCoreController('api::festival.festival', ({ strapi }) => 
         const data = await strapi.entityService.findMany(
             'api::festival.festival',
             {
-                filters: {
-                    Slug: slug,
-                },
+                filters: { Slug: slug },
                 populate,
             }
         );
