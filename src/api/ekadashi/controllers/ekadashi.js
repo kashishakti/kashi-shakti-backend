@@ -37,19 +37,61 @@ const populate = {
 
 module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => ({
 
-  // 🔹 GET ALL (paginated)
+  // 🔹 GET ALL (paginated, optional ?year and ?year&month filters)
   async find(ctx) {
 
+    const { year, month } = ctx.query;
     const { page, pageSize, start, limit } = getPagination(ctx);
+
+    const pad = (n) => String(n).padStart(2, '0');
+    let dateFilter = {};
+
+    if (year) {
+      const y = parseInt(year, 10);
+
+      if (isNaN(y)) {
+        return ctx.badRequest('Invalid year.');
+      }
+
+      if (month) {
+        // 🔹 Year + Month → filter to that specific month
+        const m = parseInt(month, 10);
+
+        if (isNaN(m) || m < 1 || m > 12) {
+          return ctx.badRequest('Invalid month. Must be between 1 and 12.');
+        }
+
+        const lastDay = new Date(y, m, 0).getDate();
+
+        dateFilter = {
+          Date: {
+            $gte: `${y}-${pad(m)}-01`,
+            $lte: `${y}-${pad(m)}-${pad(lastDay)}`,
+          },
+        };
+
+      } else {
+        // 🔹 Year only → filter to the full year
+        dateFilter = {
+          Date: {
+            $gte: `${y}-01-01`,
+            $lte: `${y}-12-31`,
+          },
+        };
+      }
+    }
 
     const [data, total] = await Promise.all([
       strapi.entityService.findMany('api::ekadashi.ekadashi', {
+        filters: dateFilter,
         populate,
-        sort: { Date: 'asc' },
+        sort:  { Date: 'asc' },
         start,
         limit,
       }),
-      strapi.entityService.count('api::ekadashi.ekadashi'),
+      strapi.entityService.count('api::ekadashi.ekadashi', {
+        filters: dateFilter,
+      }),
     ]);
 
     ctx.body = {
@@ -74,58 +116,6 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
     }
 
     ctx.body = data;
-  },
-
-  // 🔹 GET BY YEAR + MONTH (paginated)
-  async findByYearMonth(ctx) {
-
-    const { year, month } = ctx.params;
-
-    const y = parseInt(year, 10);
-    const m = parseInt(month, 10);
-
-    // Validate year and month
-    if (isNaN(y) || isNaN(m) || m < 1 || m > 12) {
-      return ctx.badRequest('Invalid year or month. Month must be between 1 and 12.');
-    }
-
-    const { page, pageSize, start, limit } = getPagination(ctx);
-
-    // Build date range for the given month (YYYY-MM-DD)
-    const pad     = (n) => String(n).padStart(2, '0');
-    const from    = `${y}-${pad(m)}-01`;
-    const lastDay = new Date(y, m, 0).getDate(); // day 0 of next month = last day of current month
-    const to      = `${y}-${pad(m)}-${pad(lastDay)}`;
-
-    const dateFilter = {
-      Date: {
-        $gte: from,
-        $lte: to,
-      },
-    };
-
-    // Run data fetch and total count in parallel
-    const [data, total] = await Promise.all([
-      strapi.entityService.findMany('api::ekadashi.ekadashi', {
-        filters: dateFilter,
-        populate,
-        sort:  { Date: 'asc' },
-        start,
-        limit,
-      }),
-      strapi.entityService.count('api::ekadashi.ekadashi', {
-        filters: dateFilter,
-      }),
-    ]);
-
-    if (!data || data.length === 0) {
-      return ctx.notFound(`No Ekadashi found for ${y}-${pad(m)}`);
-    }
-
-    ctx.body = {
-      data,
-      pagination: buildPaginationMeta(page, pageSize, total),
-    };
   },
 
   // 🔹 GET BY SLUG
