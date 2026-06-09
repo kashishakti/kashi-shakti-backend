@@ -48,6 +48,16 @@
         }
       }
     },
+    "FestivalTimings": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.muhurat-timings",
+      "repeatable": false
+    },
     "Deity": {
       "type": "component",
       "pluginOptions": {
@@ -123,6 +133,38 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "MuhuratBeginLabel": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "MuhuratEndLabel": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "FestivalPaksha": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "FamousCity": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
