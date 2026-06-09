@@ -70,6 +70,46 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
     ctx.body = data;
   },
 
+  // 🔹 GET BY YEAR + MONTH
+  async findByYearMonth(ctx) {
+
+    const { year, month } = ctx.params;
+
+    const y = parseInt(year, 10);
+    const m = parseInt(month, 10);
+
+    // Validate year and month
+    if (isNaN(y) || isNaN(m) || m < 1 || m > 12) {
+      return ctx.badRequest('Invalid year or month. Month must be between 1 and 12.');
+    }
+
+    // Build date range for the given month (YYYY-MM-DD)
+    const pad    = (n) => String(n).padStart(2, '0');
+    const from   = `${y}-${pad(m)}-01`;
+    const lastDay = new Date(y, m, 0).getDate(); // day 0 of next month = last day of current month
+    const to     = `${y}-${pad(m)}-${pad(lastDay)}`;
+
+    const data = await strapi.entityService.findMany(
+      'api::ekadashi.ekadashi',
+      {
+        filters: {
+          Date: {
+            $gte: from,
+            $lte: to,
+          },
+        },
+        populate,
+        sort: { Date: 'asc' },
+      }
+    );
+
+    if (!data || data.length === 0) {
+      return ctx.notFound(`No Ekadashi found for ${y}-${pad(m)}`);
+    }
+
+    ctx.body = data;
+  },
+
   // 🔹 GET BY SLUG
   async findBySlug(ctx) {
 
