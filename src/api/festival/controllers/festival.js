@@ -16,12 +16,8 @@ const populate = {
     HinduMonth: true,
     Deity: true,
     SEO: seo,
-    FestivalBlock: {
-        on: {
-            'shared.fa-qs': dynamicZones.commonDynamicZone.on['shared.fa-qs'],
-            'shared.link':  dynamicZones.commonDynamicZone.on['shared.link'],
-        },
-    },
+    FestivalTimings: true,
+    FestivalBlock: dynamicZones.commonDynamicZone,
 };
 
 module.exports = createCoreController('api::festival.festival', ({ strapi }) => ({

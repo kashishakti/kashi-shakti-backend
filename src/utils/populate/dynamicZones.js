@@ -24,6 +24,7 @@ module.exports = {
             'shared.related-pradosh': related.relatedPradosh,
             'shared.related-purnima': related.relatedPurnima,
             'shared.related-blogs': related.relatedBlogs,
+            'shared.related-aarti': related.relatedAarti,
 
             // 🔹 Section Components
             'section.hero': {

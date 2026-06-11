@@ -165,4 +165,21 @@ module.exports = {
         },
     },
 
+    relatedAarti: {
+        populate: {
+            aartis: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                ],
+                populate: {
+                    FeaturedImage: media,
+                },
+            },
+        },
+    },
+
 };
