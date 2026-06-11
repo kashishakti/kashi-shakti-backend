@@ -9,6 +9,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 const media = require('../../../utils/populate/media');
 const seo = require('../../../utils/populate/seo');
 const dynamicZones = require('../../../utils/populate/dynamicZones');
+const related = require('../../../utils/populate/related');
 const { getPagination, setPaginationHeaders } = require('../../../utils/pagination');
 
 const populate = {
@@ -18,6 +19,7 @@ const populate = {
     SEO: seo,
     FestivalTimings: true,
     FestivalBlock: dynamicZones.commonDynamicZone,
+    NextFestivalLink: related.relatedFestivals,
 };
 
 module.exports = createCoreController('api::festival.festival', ({ strapi }) => ({
