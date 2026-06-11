@@ -165,6 +165,16 @@
           "localized": true
         }
       }
+    },
+    "NextFestivalLink": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.related-festivals",
+      "repeatable": false
     }
   }
 }
