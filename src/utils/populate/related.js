@@ -72,8 +72,24 @@ module.exports = {
     relatedFestivals: {
         populate: {
             festivals: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                    "VikramSamvataYear",
+                    "Date",
+                    "MuhuratBeginLabel",
+                    "MuhuratEndLabel",
+                    "FestivalPaksha",
+                    "FamousCity",
+                ],
                 populate: {
                     FeaturedImage: media,
+                    Deity: true,
+                    HinduMonth: true,
+                    FestivalTimings: true,
                 },
             },
         },
