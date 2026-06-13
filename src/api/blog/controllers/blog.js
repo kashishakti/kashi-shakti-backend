@@ -22,11 +22,12 @@ module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
 
   async find(ctx) {
     const { page, pageSize, start, limit } = getPagination(ctx);
+    const { locale } = ctx.query;
     const [data, total] = await Promise.all([
       strapi.entityService.findMany('api::blog.blog', {
-        populate, sort: { createdAt: 'desc' }, start, limit,
+        populate, sort: { createdAt: 'desc' }, start, limit, locale,
       }),
-      strapi.entityService.count('api::blog.blog'),
+      strapi.entityService.count('api::blog.blog', { locale }),
     ]);
     setPaginationHeaders(ctx, page, pageSize, total);
     ctx.body = data;
@@ -34,15 +35,17 @@ module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
 
   async findOne(ctx) {
     const { id } = ctx.params;
-    const data = await strapi.entityService.findOne('api::blog.blog', id, { populate });
+    const { locale } = ctx.query;
+    const data = await strapi.entityService.findOne('api::blog.blog', id, { populate, locale });
     if (!data) return ctx.notFound(`Blog with id "${id}" not found`);
     ctx.body = data;
   },
 
   async findBySlug(ctx) {
     const { slug } = ctx.params;
+    const { locale } = ctx.query;
     const data = await strapi.entityService.findMany('api::blog.blog', {
-      filters: { Slug: slug }, populate,
+      filters: { Slug: slug }, populate, locale,
     });
     if (!data[0]) return ctx.notFound(`Blog with slug "${slug}" not found`);
     ctx.body = data[0];

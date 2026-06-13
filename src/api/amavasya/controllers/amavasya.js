@@ -21,7 +21,7 @@ const populate = {
 module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => ({
 
     async find(ctx) {
-        const { year, month } = ctx.query;
+        const { year, month, locale } = ctx.query;
 
         // month without year is meaningless — reject it explicitly
         if (month && !year) {
@@ -62,9 +62,9 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
 
         const [data, total] = await Promise.all([
             strapi.entityService.findMany('api::amavasya.amavasya', {
-                filters: dateFilter, populate, sort: { AmavasyaDate: 'asc' }, start, limit,
+                filters: dateFilter, populate, sort: { AmavasyaDate: 'asc' }, start, limit, locale,
             }),
-            strapi.entityService.count('api::amavasya.amavasya', { filters: dateFilter }),
+            strapi.entityService.count('api::amavasya.amavasya', { filters: dateFilter, locale }),
         ]);
 
         setPaginationHeaders(ctx, page, pageSize, total);
@@ -73,15 +73,17 @@ module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => 
 
     async findOne(ctx) {
         const { id } = ctx.params;
-        const data = await strapi.entityService.findOne('api::amavasya.amavasya', id, { populate });
+        const { locale } = ctx.query;
+        const data = await strapi.entityService.findOne('api::amavasya.amavasya', id, { populate, locale });
         if (!data) return ctx.notFound(`Amavasya with id "${id}" not found`);
         ctx.body = data;
     },
 
     async findBySlug(ctx) {
         const { slug } = ctx.params;
+        const { locale } = ctx.query;
         const data = await strapi.entityService.findMany('api::amavasya.amavasya', {
-            filters: { Slug: slug }, populate,
+            filters: { Slug: slug }, populate, locale,
         });
         if (!data[0]) return ctx.notFound(`Amavasya with slug "${slug}" not found`);
         ctx.body = data[0];

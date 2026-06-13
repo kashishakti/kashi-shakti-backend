@@ -25,7 +25,7 @@ const populate = {
 module.exports = createCoreController('api::purnima.purnima', ({ strapi }) => ({
 
     async find(ctx) {
-        const { year, month } = ctx.query;
+        const { year, month, locale } = ctx.query;
 
         // month without year is meaningless — reject it explicitly
         if (month && !year) {
@@ -66,9 +66,9 @@ module.exports = createCoreController('api::purnima.purnima', ({ strapi }) => ({
 
         const [data, total] = await Promise.all([
             strapi.entityService.findMany('api::purnima.purnima', {
-                filters: dateFilter, populate, sort: { PurnimaDate: 'asc' }, start, limit,
+                filters: dateFilter, populate, sort: { PurnimaDate: 'asc' }, start, limit, locale,
             }),
-            strapi.entityService.count('api::purnima.purnima', { filters: dateFilter }),
+            strapi.entityService.count('api::purnima.purnima', { filters: dateFilter, locale }),
         ]);
 
         setPaginationHeaders(ctx, page, pageSize, total);
@@ -77,15 +77,17 @@ module.exports = createCoreController('api::purnima.purnima', ({ strapi }) => ({
 
     async findOne(ctx) {
         const { id } = ctx.params;
-        const data = await strapi.entityService.findOne('api::purnima.purnima', id, { populate });
+        const { locale } = ctx.query;
+        const data = await strapi.entityService.findOne('api::purnima.purnima', id, { populate, locale });
         if (!data) return ctx.notFound(`Purnima with id "${id}" not found`);
         ctx.body = data;
     },
 
     async findBySlug(ctx) {
         const { slug } = ctx.params;
+        const { locale } = ctx.query;
         const data = await strapi.entityService.findMany('api::purnima.purnima', {
-            filters: { Slug: slug }, populate,
+            filters: { Slug: slug }, populate, locale,
         });
         if (!data[0]) return ctx.notFound(`Purnima with slug "${slug}" not found`);
         ctx.body = data[0];

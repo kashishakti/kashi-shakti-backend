@@ -28,7 +28,7 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
   // 🔹 GET ALL (paginated, optional ?year and ?year&month filters)
   async find(ctx) {
 
-    const { year, month } = ctx.query;
+    const { year, month, locale } = ctx.query;
 
     // month without year is meaningless — reject it explicitly
     if (month && !year) {
@@ -69,9 +69,9 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
 
     const [data, total] = await Promise.all([
       strapi.entityService.findMany('api::ekadashi.ekadashi', {
-        filters: dateFilter, populate, sort: { Date: 'asc' }, start, limit,
+        filters: dateFilter, populate, sort: { Date: 'asc' }, start, limit, locale,
       }),
-      strapi.entityService.count('api::ekadashi.ekadashi', { filters: dateFilter }),
+      strapi.entityService.count('api::ekadashi.ekadashi', { filters: dateFilter, locale }),
     ]);
 
     setPaginationHeaders(ctx, page, pageSize, total);
@@ -81,7 +81,8 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
   // 🔹 GET BY ID
   async findOne(ctx) {
     const { id } = ctx.params;
-    const data = await strapi.entityService.findOne('api::ekadashi.ekadashi', id, { populate });
+    const { locale } = ctx.query;
+    const data = await strapi.entityService.findOne('api::ekadashi.ekadashi', id, { populate, locale });
     if (!data) return ctx.notFound(`Ekadashi with id "${id}" not found`);
     ctx.body = data;
   },
@@ -89,8 +90,9 @@ module.exports = createCoreController('api::ekadashi.ekadashi', ({ strapi }) => 
   // 🔹 GET BY SLUG
   async findBySlug(ctx) {
     const { slug } = ctx.params;
+    const { locale } = ctx.query;
     const data = await strapi.entityService.findMany('api::ekadashi.ekadashi', {
-      filters: { Slug: slug }, populate,
+      filters: { Slug: slug }, populate, locale,
     });
     if (!data[0]) return ctx.notFound(`Ekadashi with slug "${slug}" not found`);
     ctx.body = data[0];

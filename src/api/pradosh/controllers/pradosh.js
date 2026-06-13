@@ -27,7 +27,7 @@ const populate = {
 module.exports = createCoreController('api::pradosh.pradosh', ({ strapi }) => ({
 
     async find(ctx) {
-        const { year, month } = ctx.query;
+        const { year, month, locale } = ctx.query;
 
         // month without year is meaningless — reject it explicitly
         if (month && !year) {
@@ -68,9 +68,9 @@ module.exports = createCoreController('api::pradosh.pradosh', ({ strapi }) => ({
 
         const [data, total] = await Promise.all([
             strapi.entityService.findMany('api::pradosh.pradosh', {
-                filters: dateFilter, populate, sort: { Date: 'asc' }, start, limit,
+                filters: dateFilter, populate, sort: { Date: 'asc' }, start, limit, locale,
             }),
-            strapi.entityService.count('api::pradosh.pradosh', { filters: dateFilter }),
+            strapi.entityService.count('api::pradosh.pradosh', { filters: dateFilter, locale }),
         ]);
 
         setPaginationHeaders(ctx, page, pageSize, total);
@@ -79,15 +79,17 @@ module.exports = createCoreController('api::pradosh.pradosh', ({ strapi }) => ({
 
     async findOne(ctx) {
         const { id } = ctx.params;
-        const data = await strapi.entityService.findOne('api::pradosh.pradosh', id, { populate });
+        const { locale } = ctx.query;
+        const data = await strapi.entityService.findOne('api::pradosh.pradosh', id, { populate, locale });
         if (!data) return ctx.notFound(`Pradosh with id "${id}" not found`);
         ctx.body = data;
     },
 
     async findBySlug(ctx) {
         const { slug } = ctx.params;
+        const { locale } = ctx.query;
         const data = await strapi.entityService.findMany('api::pradosh.pradosh', {
-            filters: { Slug: slug }, populate,
+            filters: { Slug: slug }, populate, locale,
         });
         if (!data[0]) return ctx.notFound(`Pradosh with slug "${slug}" not found`);
         ctx.body = data[0];

@@ -21,11 +21,12 @@ module.exports = createCoreController('api::temple.temple', ({ strapi }) => ({
 
     async find(ctx) {
         const { page, pageSize, start, limit } = getPagination(ctx);
+        const { locale } = ctx.query;
         const [data, total] = await Promise.all([
             strapi.entityService.findMany('api::temple.temple', {
-                populate, sort: { createdAt: 'desc' }, start, limit,
+                populate, sort: { createdAt: 'desc' }, start, limit, locale,
             }),
-            strapi.entityService.count('api::temple.temple'),
+            strapi.entityService.count('api::temple.temple', { locale }),
         ]);
         setPaginationHeaders(ctx, page, pageSize, total);
         ctx.body = data;
@@ -33,15 +34,17 @@ module.exports = createCoreController('api::temple.temple', ({ strapi }) => ({
 
     async findOne(ctx) {
         const { id } = ctx.params;
-        const data = await strapi.entityService.findOne('api::temple.temple', id, { populate });
+        const { locale } = ctx.query;
+        const data = await strapi.entityService.findOne('api::temple.temple', id, { populate, locale });
         if (!data) return ctx.notFound(`Temple with id "${id}" not found`);
         ctx.body = data;
     },
 
     async findBySlug(ctx) {
         const { slug } = ctx.params;
+        const { locale } = ctx.query;
         const data = await strapi.entityService.findMany('api::temple.temple', {
-            filters: { Slug: slug }, populate,
+            filters: { Slug: slug }, populate, locale,
         });
         if (!data[0]) return ctx.notFound(`Temple with slug "${slug}" not found`);
         ctx.body = data[0];
