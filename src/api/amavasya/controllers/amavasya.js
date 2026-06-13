@@ -21,13 +21,52 @@ const populate = {
 module.exports = createCoreController('api::amavasya.amavasya', ({ strapi }) => ({
 
     async find(ctx) {
+        const { year, month } = ctx.query;
+
+        // month without year is meaningless — reject it explicitly
+        if (month && !year) {
+            return ctx.badRequest('`month` requires `year` to also be specified. Example: ?year=2025&month=11');
+        }
+
         const { page, pageSize, start, limit } = getPagination(ctx);
+
+        const pad = (n) => String(n).padStart(2, '0');
+        let dateFilter = {};
+
+        if (year) {
+            const y = parseInt(year, 10);
+
+            if (isNaN(y)) {
+                return ctx.badRequest('Invalid year.');
+            }
+
+            if (month) {
+                const m = parseInt(month, 10);
+
+                if (isNaN(m) || m < 1 || m > 12) {
+                    return ctx.badRequest('Invalid month. Must be between 1 and 12.');
+                }
+
+                const lastDay = new Date(y, m, 0).getDate();
+
+                dateFilter = {
+                    AmavasyaDate: { $gte: `${y}-${pad(m)}-01`, $lte: `${y}-${pad(m)}-${pad(lastDay)}` },
+                };
+
+            } else {
+                dateFilter = {
+                    AmavasyaDate: { $gte: `${y}-01-01`, $lte: `${y}-12-31` },
+                };
+            }
+        }
+
         const [data, total] = await Promise.all([
             strapi.entityService.findMany('api::amavasya.amavasya', {
-                populate, sort: { AmavasyaDate: 'asc' }, start, limit,
+                filters: dateFilter, populate, sort: { AmavasyaDate: 'asc' }, start, limit,
             }),
-            strapi.entityService.count('api::amavasya.amavasya'),
+            strapi.entityService.count('api::amavasya.amavasya', { filters: dateFilter }),
         ]);
+
         setPaginationHeaders(ctx, page, pageSize, total);
         ctx.body = data;
     },

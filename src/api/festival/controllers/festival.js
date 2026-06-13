@@ -25,13 +25,52 @@ const populate = {
 module.exports = createCoreController('api::festival.festival', ({ strapi }) => ({
 
     async find(ctx) {
+        const { year, month } = ctx.query;
+
+        // month without year is meaningless — reject it explicitly
+        if (month && !year) {
+            return ctx.badRequest('`month` requires `year` to also be specified. Example: ?year=2025&month=11');
+        }
+
         const { page, pageSize, start, limit } = getPagination(ctx);
+
+        const pad = (n) => String(n).padStart(2, '0');
+        let dateFilter = {};
+
+        if (year) {
+            const y = parseInt(year, 10);
+
+            if (isNaN(y)) {
+                return ctx.badRequest('Invalid year.');
+            }
+
+            if (month) {
+                const m = parseInt(month, 10);
+
+                if (isNaN(m) || m < 1 || m > 12) {
+                    return ctx.badRequest('Invalid month. Must be between 1 and 12.');
+                }
+
+                const lastDay = new Date(y, m, 0).getDate();
+
+                dateFilter = {
+                    Date: { $gte: `${y}-${pad(m)}-01`, $lte: `${y}-${pad(m)}-${pad(lastDay)}` },
+                };
+
+            } else {
+                dateFilter = {
+                    Date: { $gte: `${y}-01-01`, $lte: `${y}-12-31` },
+                };
+            }
+        }
+
         const [data, total] = await Promise.all([
             strapi.entityService.findMany('api::festival.festival', {
-                populate, sort: { Date: 'asc' }, start, limit,
+                filters: dateFilter, populate, sort: { Date: 'asc' }, start, limit,
             }),
-            strapi.entityService.count('api::festival.festival'),
+            strapi.entityService.count('api::festival.festival', { filters: dateFilter }),
         ]);
+
         setPaginationHeaders(ctx, page, pageSize, total);
         ctx.body = data;
     },
