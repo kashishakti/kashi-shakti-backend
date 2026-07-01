@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "blogs",
+  "collectionName": "poojas",
   "info": {
-    "singularName": "blog",
-    "pluralName": "blogs",
-    "displayName": "Blogs"
+    "singularName": "pooja",
+    "pluralName": "poojas",
+    "displayName": "Pooja"
   },
   "options": {
     "draftAndPublish": true
@@ -15,16 +15,8 @@
     }
   },
   "attributes": {
-    "Title": {
+    "PoojaTitle": {
       "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "ShortDescription": {
-      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -38,7 +30,15 @@
           "localized": true
         }
       },
-      "targetField": "Title"
+      "targetField": "PoojaTitle"
+    },
+    "ShortDescription": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "FeaturedImage": {
       "type": "media",
@@ -47,26 +47,15 @@
           "localized": true
         }
       },
-      "multiple": false,
+      "multiple": true,
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos",
+        "audios"
       ]
     },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "inversedBy": "blogs"
-    },
-    "Description": {
-      "type": "richtext",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "BlogsBlock": {
+    "PoojaBlock": {
       "type": "dynamiczone",
       "pluginOptions": {
         "i18n": {
@@ -74,6 +63,7 @@
         }
       },
       "components": [
+        "shared.rich-text",
         "shared.related-vrat-katha",
         "shared.related-temples",
         "shared.related-purnima",
@@ -81,24 +71,35 @@
         "shared.related-pradosh",
         "shared.related-festivals",
         "shared.related-ekadashi",
-        "shared.related-amavasya",
-        "shared.link",
-        "shared.fa-qs",
         "shared.related-blogs",
+        "shared.related-amavasya",
         "shared.related-aarti",
-        "section.pooja-widget",
-        "shared.rich-text"
+        "shared.fa-qs"
       ]
     },
-    "SEO": {
-      "type": "component",
+    "Price": {
+      "type": "float",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "component": "shared.seo",
-      "repeatable": false
+      }
+    },
+    "PoojaStart": {
+      "type": "datetime",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "PoojaEnd": {
+      "type": "datetime",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

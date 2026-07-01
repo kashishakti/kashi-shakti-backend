@@ -641,6 +641,8 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
         'shared.fa-qs',
         'shared.related-blogs',
         'shared.related-aarti',
+        'section.pooja-widget',
+        'shared.rich-text',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1268,6 +1270,100 @@ export interface ApiPolicyPolicy extends Struct.CollectionTypeSchema {
     ShortDescription: Schema.Attribute.Text;
     Slug: Schema.Attribute.UID<'Title'>;
     Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPoojaPooja extends Struct.CollectionTypeSchema {
+  collectionName: 'poojas';
+  info: {
+    displayName: 'Pooja';
+    pluralName: 'poojas';
+    singularName: 'pooja';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    FeaturedImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::pooja.pooja'>;
+    PoojaBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.rich-text',
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+        'shared.related-ekadashi',
+        'shared.related-blogs',
+        'shared.related-amavasya',
+        'shared.related-aarti',
+        'shared.fa-qs',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    PoojaEnd: Schema.Attribute.DateTime &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    PoojaStart: Schema.Attribute.DateTime &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    PoojaTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Price: Schema.Attribute.Float &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    ShortDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Slug: Schema.Attribute.UID<'PoojaTitle'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -2420,6 +2516,7 @@ declare module '@strapi/strapi' {
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::menu.menu': ApiMenuMenu;
       'api::policy.policy': ApiPolicyPolicy;
+      'api::pooja.pooja': ApiPoojaPooja;
       'api::pradosh.pradosh': ApiPradoshPradosh;
       'api::puja-vidhi.puja-vidhi': ApiPujaVidhiPujaVidhi;
       'api::purnima.purnima': ApiPurnimaPurnima;

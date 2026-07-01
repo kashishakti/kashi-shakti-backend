@@ -96,6 +96,17 @@ export interface SectionHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionPoojaWidget extends Struct.ComponentSchema {
+  collectionName: 'components_section_pooja_widgets';
+  info: {
+    displayName: 'PoojaWidget';
+  };
+  attributes: {
+    poojas: Schema.Attribute.Relation<'oneToMany', 'api::pooja.pooja'>;
+    ShowonSideBar: Schema.Attribute.Boolean;
+  };
+}
+
 export interface SectionTrustBadges extends Struct.ComponentSchema {
   collectionName: 'components_section_trust_badges';
   info: {
@@ -299,6 +310,16 @@ export interface SharedRelatedVratKatha extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedRichText extends Struct.ComponentSchema {
+  collectionName: 'components_shared_rich_texts';
+  info: {
+    displayName: 'RichText';
+  };
+  attributes: {
+    RichText: Schema.Attribute.RichText;
+  };
+}
+
 export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
@@ -327,6 +348,7 @@ declare module '@strapi/strapi' {
       'section.featured-temples': SectionFeaturedTemples;
       'section.featured-vrat': SectionFeaturedVrat;
       'section.hero': SectionHero;
+      'section.pooja-widget': SectionPoojaWidget;
       'section.trust-badges': SectionTrustBadges;
       'shared.deity': SharedDeity;
       'shared.fa-qs': SharedFaQs;
@@ -344,6 +366,7 @@ declare module '@strapi/strapi' {
       'shared.related-purnima': SharedRelatedPurnima;
       'shared.related-temples': SharedRelatedTemples;
       'shared.related-vrat-katha': SharedRelatedVratKatha;
+      'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
     }
   }

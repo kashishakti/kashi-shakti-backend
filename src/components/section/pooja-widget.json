@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_section_pooja_widgets",
+  "info": {
+    "displayName": "PoojaWidget"
+  },
+  "options": {},
+  "attributes": {
+    "poojas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::pooja.pooja"
+    },
+    "ShowonSideBar": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}
