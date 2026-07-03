@@ -1968,6 +1968,14 @@ export interface ApiVratKathaVratKatha extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    Type: Schema.Attribute.Enumeration<
+      ['Ekadashi', 'Pradosh', 'Amavasya', 'Purnima', 'Festival', 'Other']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

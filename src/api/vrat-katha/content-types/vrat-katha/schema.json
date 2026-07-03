@@ -125,6 +125,22 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "Type": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "enum": [
+        "Ekadashi",
+        "Pradosh",
+        "Amavasya",
+        "Purnima",
+        "Festival",
+        "Other"
+      ]
     }
   }
 }
