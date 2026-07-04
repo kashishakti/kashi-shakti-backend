@@ -87,7 +87,8 @@
         "shared.related-blogs",
         "shared.related-aarti",
         "section.pooja-widget",
-        "shared.rich-text"
+        "shared.rich-text",
+        "section.mantra-card-widget"
       ]
     },
     "SEO": {

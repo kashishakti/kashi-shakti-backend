@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_section_mantra_card_widgets",
+  "info": {
+    "displayName": "MantraCardWidget"
+  },
+  "options": {},
+  "attributes": {
+    "mantra_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::mantra-card.mantra-card"
+    },
+    "ShowonSideBar": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

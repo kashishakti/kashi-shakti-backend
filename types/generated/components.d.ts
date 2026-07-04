@@ -96,6 +96,20 @@ export interface SectionHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionMantraCardWidget extends Struct.ComponentSchema {
+  collectionName: 'components_section_mantra_card_widgets';
+  info: {
+    displayName: 'MantraCardWidget';
+  };
+  attributes: {
+    mantra_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::mantra-card.mantra-card'
+    >;
+    ShowonSideBar: Schema.Attribute.Boolean;
+  };
+}
+
 export interface SectionPoojaWidget extends Struct.ComponentSchema {
   collectionName: 'components_section_pooja_widgets';
   info: {
@@ -368,6 +382,7 @@ declare module '@strapi/strapi' {
       'section.featured-temples': SectionFeaturedTemples;
       'section.featured-vrat': SectionFeaturedVrat;
       'section.hero': SectionHero;
+      'section.mantra-card-widget': SectionMantraCardWidget;
       'section.pooja-widget': SectionPoojaWidget;
       'section.trust-badges': SectionTrustBadges;
       'shared.deity': SharedDeity;
