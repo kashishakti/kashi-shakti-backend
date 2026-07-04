@@ -224,6 +224,26 @@ export interface SharedRelatedAmavasya extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedRelatedAuthor extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_authors';
+  info: {
+    displayName: 'RelatedAuthor';
+  };
+  attributes: {
+    authors: Schema.Attribute.Relation<'oneToMany', 'api::author.author'>;
+  };
+}
+
+export interface SharedRelatedBlogTags extends Struct.ComponentSchema {
+  collectionName: 'components_shared_related_blog_tags';
+  info: {
+    displayName: 'RelatedBlogTags';
+  };
+  attributes: {
+    blog_tags: Schema.Attribute.Relation<'oneToMany', 'api::blog-tag.blog-tag'>;
+  };
+}
+
 export interface SharedRelatedBlogs extends Struct.ComponentSchema {
   collectionName: 'components_shared_related_blogs';
   info: {
@@ -358,6 +378,8 @@ declare module '@strapi/strapi' {
       'shared.muhurat-timings': SharedMuhuratTimings;
       'shared.related-aarti': SharedRelatedAarti;
       'shared.related-amavasya': SharedRelatedAmavasya;
+      'shared.related-author': SharedRelatedAuthor;
+      'shared.related-blog-tags': SharedRelatedBlogTags;
       'shared.related-blogs': SharedRelatedBlogs;
       'shared.related-ekadashi': SharedRelatedEkadashi;
       'shared.related-festivals': SharedRelatedFestivals;

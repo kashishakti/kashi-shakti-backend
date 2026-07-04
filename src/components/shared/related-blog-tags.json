@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_blog_tags",
+  "info": {
+    "displayName": "RelatedBlogTags"
+  },
+  "options": {},
+  "attributes": {
+    "blog_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-tag.blog-tag"
+    }
+  },
+  "config": {}
+}

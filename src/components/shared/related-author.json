@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_related_authors",
+  "info": {
+    "displayName": "RelatedAuthor"
+  },
+  "options": {},
+  "attributes": {
+    "authors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::author.author"
+    }
+  },
+  "config": {}
+}

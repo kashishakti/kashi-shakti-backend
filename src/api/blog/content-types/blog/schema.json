@@ -99,6 +99,34 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "Author": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.related-author",
+      "repeatable": false
+    },
+    "BlogTags": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.related-blog-tags",
+      "repeatable": true
+    },
+    "ReadTime": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
