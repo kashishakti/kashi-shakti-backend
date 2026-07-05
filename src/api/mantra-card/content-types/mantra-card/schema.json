@@ -39,6 +39,14 @@
           "localized": true
         }
       }
+    },
+    "Price": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

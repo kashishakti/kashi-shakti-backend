@@ -1447,6 +1447,12 @@ export interface ApiMantraCardOrderMantraCardOrder
           localized: true;
         };
       }>;
+    isPaymentComplete: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1507,6 +1513,12 @@ export interface ApiMantraCardMantraCard extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::mantra-card.mantra-card'
     >;
+    Price: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     ShortDescription: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
@@ -1645,6 +1657,12 @@ export interface ApiPoojaOrderPoojaOrder extends Struct.CollectionTypeSchema {
         };
       }>;
     Gotra: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    isPaymentComplete: Schema.Attribute.Boolean &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
