@@ -16,6 +16,20 @@ const populate = {
   categories: true,
   SEO: seo,
   BlogsBlock: dynamicZones.commonDynamicZone,
+  Author: {
+    populate: {
+      authors: {
+        populate: {
+          FeaturedImage: media,
+        },
+      },
+    },
+  },
+  BlogTags: {
+    populate: {
+      blog_tags: true,
+    },
+  },
 };
 
 module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({

@@ -57,6 +57,23 @@ module.exports = {
                     PujaVidhiLink: true,
                 },
             },
+            'section.pooja-widget': {
+                populate: {
+                    poojas: {
+                        populate: {
+                            FeaturedImage: media,
+                        },
+                    },
+                },
+            },
+            'section.mantra-card-widget': {
+                populate: {
+                    mantra_cards: true,
+                },
+            },
+            'shared.rich-text': {
+                populate: '*',
+            },
 
         },
     },
