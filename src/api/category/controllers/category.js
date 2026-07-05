@@ -8,10 +8,11 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 const media = require('../../../utils/populate/media');
 const seo = require('../../../utils/populate/seo');
+const related = require('../../../utils/populate/related');
 const { getPagination, setPaginationHeaders } = require('../../../utils/pagination');
 
 const populate = {
-  blogs: { populate: { FeaturedImage: media } },
+  ...related.relatedBlogs.populate,
   SEO: seo,
 };
 
