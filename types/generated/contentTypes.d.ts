@@ -816,30 +816,6 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    BlogsBlock: Schema.Attribute.DynamicZone<
-      [
-        'shared.related-vrat-katha',
-        'shared.related-temples',
-        'shared.related-purnima',
-        'shared.related-puja-vidhi',
-        'shared.related-pradosh',
-        'shared.related-festivals',
-        'shared.related-ekadashi',
-        'shared.related-amavasya',
-        'shared.link',
-        'shared.fa-qs',
-        'shared.related-blogs',
-        'shared.related-aarti',
-        'section.pooja-widget',
-        'shared.rich-text',
-        'section.mantra-card-widget',
-      ]
-    > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     BlogTags: Schema.Attribute.Component<'shared.related-blog-tags', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -865,10 +841,48 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    LeftBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+        'shared.related-ekadashi',
+        'shared.related-amavasya',
+        'shared.link',
+        'shared.fa-qs',
+        'shared.related-blogs',
+        'shared.related-aarti',
+        'section.pooja-widget',
+        'shared.rich-text',
+        'section.mantra-card-widget',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     publishedAt: Schema.Attribute.DateTime;
     ReadTime: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    RightBlock: Schema.Attribute.DynamicZone<
+      [
+        'section.pooja-widget',
+        'section.mantra-card-widget',
+        'shared.rich-text',
+        'shared.link',
+        'shared.logo-link',
+      ]
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

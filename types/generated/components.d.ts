@@ -106,7 +106,6 @@ export interface SectionMantraCardWidget extends Struct.ComponentSchema {
       'oneToMany',
       'api::mantra-card.mantra-card'
     >;
-    ShowonSideBar: Schema.Attribute.Boolean;
   };
 }
 
@@ -117,7 +116,6 @@ export interface SectionPoojaWidget extends Struct.ComponentSchema {
   };
   attributes: {
     poojas: Schema.Attribute.Relation<'oneToMany', 'api::pooja.pooja'>;
-    ShowonSideBar: Schema.Attribute.Boolean;
   };
 }
 

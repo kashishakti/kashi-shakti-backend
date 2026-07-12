@@ -9,9 +9,6 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::mantra-card.mantra-card"
-    },
-    "ShowonSideBar": {
-      "type": "boolean"
     }
   },
   "config": {}
