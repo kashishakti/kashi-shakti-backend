@@ -174,8 +174,36 @@ module.exports = {
     relatedBlogs: {
         populate: {
             blogs: {
+                fields: [
+                    "id",
+                    "documentId",
+                    "Title",
+                    "Slug",
+                    "ShortDescription",
+                    "ReadTime",
+                ],
                 populate: {
                     FeaturedImage: media,
+                    categories: {
+                        fields: ["id", "documentId", "Title", "Slug"],
+                    },
+                    Author: {
+                        populate: {
+                            authors: {
+                                fields: ["id", "documentId", "Title", "Slug", "ShortDescription"],
+                                populate: {
+                                    FeaturedImage: media,
+                                },
+                            },
+                        },
+                    },
+                    BlogTags: {
+                        populate: {
+                            blog_tags: {
+                                fields: ["id", "documentId", "Title", "Slug", "ShortDescription"],
+                            },
+                        },
+                    },
                 },
             },
         },
