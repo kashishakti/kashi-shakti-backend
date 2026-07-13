@@ -88,7 +88,8 @@
         "shared.related-aarti",
         "section.pooja-widget",
         "shared.rich-text",
-        "section.mantra-card-widget"
+        "section.mantra-card-widget",
+        "section.pandit-widget"
       ]
     },
     "SEO": {
@@ -141,7 +142,8 @@
         "section.mantra-card-widget",
         "shared.rich-text",
         "shared.link",
-        "shared.logo-link"
+        "shared.logo-link",
+        "section.pandit-widget"
       ]
     }
   }

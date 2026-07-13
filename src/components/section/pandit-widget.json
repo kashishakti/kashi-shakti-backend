@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_section_pandit_widgets",
+  "info": {
+    "displayName": "PanditWidget"
+  },
+  "options": {},
+  "attributes": {
+    "ShowPanditWidget": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

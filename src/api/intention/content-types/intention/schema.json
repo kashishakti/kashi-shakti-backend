@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "intentions",
+  "info": {
+    "singularName": "intention",
+    "pluralName": "intentions",
+    "displayName": "Intention"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "Slug": {
+      "type": "uid",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "targetField": "Title"
+    },
+    "ShortDescription": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "deities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::deity.deity",
+      "mappedBy": "intentions"
+    }
+  }
+}
