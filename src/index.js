@@ -112,7 +112,23 @@ module.exports = {
                 blog_tags: dummyTag ? [dummyTag.id] : [],
               }
             ],
-            BlogsBlock: [
+            LeftBlock: [
+              {
+                __component: 'shared.rich-text',
+                RichText: 'This is some rich text component content inside the blog block.',
+              },
+              {
+                __component: 'section.pooja-widget',
+                ShowonSideBar: true,
+                poojas: dummyPooja ? [dummyPooja.id] : [],
+              },
+              {
+                __component: 'section.mantra-card-widget',
+                ShowonSideBar: false,
+                mantra_cards: dummyMantra ? [dummyMantra.id] : [],
+              }
+            ],
+            RightBlock: [
               {
                 __component: 'shared.rich-text',
                 RichText: 'This is some rich text component content inside the blog block.',

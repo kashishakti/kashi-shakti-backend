@@ -1533,6 +1533,12 @@ export interface ApiMantraCardOrderMantraCardOrder
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Deity: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     DOB: Schema.Attribute.Date &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

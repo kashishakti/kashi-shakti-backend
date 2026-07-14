@@ -15,7 +15,8 @@ const populate = {
   FeaturedImage: media,
   categories: true,
   SEO: seo,
-  BlogsBlock: dynamicZones.commonDynamicZone,
+  LeftBlock: dynamicZones.commonDynamicZone,
+  RightBlock: dynamicZones.commonDynamicZone,
   Author: {
     populate: {
       authors: {
