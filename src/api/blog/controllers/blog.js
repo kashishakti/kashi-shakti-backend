@@ -17,6 +17,8 @@ const populate = {
   SEO: seo,
   LeftBlock: dynamicZones.commonDynamicZone,
   RightBlock: dynamicZones.commonDynamicZone,
+  FAQBlock: dynamicZones.commonDynamicZone,
+  RelatedReadingBlock: dynamicZones.commonDynamicZone,
   Author: {
     populate: {
       authors: {

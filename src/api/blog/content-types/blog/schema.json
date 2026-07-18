@@ -66,18 +66,7 @@
         }
       },
       "components": [
-        "shared.related-vrat-katha",
-        "shared.related-temples",
-        "shared.related-purnima",
-        "shared.related-puja-vidhi",
-        "shared.related-pradosh",
-        "shared.related-festivals",
-        "shared.related-ekadashi",
-        "shared.related-amavasya",
         "shared.link",
-        "shared.fa-qs",
-        "shared.related-blogs",
-        "shared.related-aarti",
         "section.pooja-widget",
         "shared.rich-text",
         "section.mantra-card-widget",
@@ -137,6 +126,37 @@
         "shared.link",
         "shared.logo-link",
         "section.pandit-widget"
+      ]
+    },
+    "FAQBlock": {
+      "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "components": [
+        "shared.fa-qs"
+      ]
+    },
+    "RelatedReadingBlock": {
+      "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "components": [
+        "shared.related-vrat-katha",
+        "shared.related-temples",
+        "shared.related-purnima",
+        "shared.related-puja-vidhi",
+        "shared.related-pradosh",
+        "shared.related-festivals",
+        "shared.related-ekadashi",
+        "shared.related-blogs",
+        "shared.related-amavasya",
+        "shared.related-aarti"
       ]
     }
   }

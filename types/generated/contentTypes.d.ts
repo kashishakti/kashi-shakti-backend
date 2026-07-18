@@ -829,6 +829,12 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    FAQBlock: Schema.Attribute.DynamicZone<['shared.fa-qs']> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     FeaturedImage: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -837,18 +843,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       }>;
     LeftBlock: Schema.Attribute.DynamicZone<
       [
-        'shared.related-vrat-katha',
-        'shared.related-temples',
-        'shared.related-purnima',
-        'shared.related-puja-vidhi',
-        'shared.related-pradosh',
-        'shared.related-festivals',
-        'shared.related-ekadashi',
-        'shared.related-amavasya',
         'shared.link',
-        'shared.fa-qs',
-        'shared.related-blogs',
-        'shared.related-aarti',
         'section.pooja-widget',
         'shared.rich-text',
         'section.mantra-card-widget',
@@ -865,6 +860,25 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     publishedAt: Schema.Attribute.DateTime;
     ReadTime: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    RelatedReadingBlock: Schema.Attribute.DynamicZone<
+      [
+        'shared.related-vrat-katha',
+        'shared.related-temples',
+        'shared.related-purnima',
+        'shared.related-puja-vidhi',
+        'shared.related-pradosh',
+        'shared.related-festivals',
+        'shared.related-ekadashi',
+        'shared.related-blogs',
+        'shared.related-amavasya',
+        'shared.related-aarti',
+      ]
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
