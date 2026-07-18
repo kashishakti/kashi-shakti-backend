@@ -58,14 +58,6 @@
       "target": "api::category.category",
       "inversedBy": "blogs"
     },
-    "Description": {
-      "type": "richtext",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "LeftBlock": {
       "type": "dynamiczone",
       "pluginOptions": {
