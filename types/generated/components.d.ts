@@ -188,6 +188,16 @@ export interface SharedHinduMonth extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedImage extends Struct.ComponentSchema {
+  collectionName: 'components_shared_images';
+  info: {
+    displayName: 'Image';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -397,6 +407,7 @@ declare module '@strapi/strapi' {
       'shared.deity': SharedDeity;
       'shared.fa-qs': SharedFaQs;
       'shared.hindu-month': SharedHinduMonth;
+      'shared.image': SharedImage;
       'shared.link': SharedLink;
       'shared.logo-link': SharedLogoLink;
       'shared.muhurat-timings': SharedMuhuratTimings;

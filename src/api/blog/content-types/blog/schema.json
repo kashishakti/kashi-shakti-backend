@@ -89,7 +89,8 @@
         "section.pooja-widget",
         "shared.rich-text",
         "section.mantra-card-widget",
-        "section.pandit-widget"
+        "section.pandit-widget",
+        "shared.image"
       ]
     },
     "SEO": {

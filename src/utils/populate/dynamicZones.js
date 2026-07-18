@@ -74,6 +74,11 @@ module.exports = {
             'shared.rich-text': {
                 populate: '*',
             },
+            'shared.image': {
+                populate: {
+                    image: media,
+                },
+            },
 
         },
     },

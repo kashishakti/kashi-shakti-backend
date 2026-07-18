@@ -859,6 +859,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
         'shared.rich-text',
         'section.mantra-card-widget',
         'section.pandit-widget',
+        'shared.image',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
