@@ -13,7 +13,11 @@ const { getPagination, setPaginationHeaders } = require('../../../utils/paginati
 
 const populate = {
   FeaturedImage: media,
-  category: true,
+  category: {
+    populate: {
+    fields: ['Title', 'Slug'],
+}
+  },
   SEO: seo,
   LeftBlock: dynamicZones.commonDynamicZone,
   RightBlock: dynamicZones.commonDynamicZone,
