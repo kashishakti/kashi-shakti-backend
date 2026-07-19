@@ -184,7 +184,7 @@ module.exports = {
                 ],
                 populate: {
                     FeaturedImage: media,
-                    categories: {
+                    category: {
                         fields: ["id", "documentId", "Title", "Slug"],
                     },
                     Author: {

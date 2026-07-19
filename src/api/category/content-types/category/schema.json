@@ -60,9 +60,9 @@
     },
     "blogs": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::blog.blog",
-      "mappedBy": "categories"
+      "mappedBy": "category"
     }
   }
 }

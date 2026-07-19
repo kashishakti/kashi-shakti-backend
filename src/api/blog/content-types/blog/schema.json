@@ -52,12 +52,6 @@
         "images"
       ]
     },
-    "categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::category.category",
-      "inversedBy": "blogs"
-    },
     "LeftBlock": {
       "type": "dynamiczone",
       "pluginOptions": {
@@ -159,6 +153,12 @@
         "shared.related-amavasya",
         "shared.related-aarti"
       ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "blogs"
     }
   }
 }

@@ -13,7 +13,7 @@ const { getPagination, setPaginationHeaders } = require('../../../utils/paginati
 
 const populate = {
   FeaturedImage: media,
-  categories: true,
+  category: true,
   SEO: seo,
   LeftBlock: dynamicZones.commonDynamicZone,
   RightBlock: dynamicZones.commonDynamicZone,
@@ -39,12 +39,16 @@ module.exports = createCoreController('api::blog.blog', ({ strapi }) => ({
 
   async find(ctx) {
     const { page, pageSize, start, limit } = getPagination(ctx);
-    const { locale } = ctx.query;
+    const { locale, category } = ctx.query;
+
+    const filters = {};
+    if (category) filters.category = { Slug: category };
+
     const [data, total] = await Promise.all([
       strapi.entityService.findMany('api::blog.blog', {
-        populate, sort: { createdAt: 'desc' }, start, limit, locale,
+        filters, populate, sort: { createdAt: 'desc' }, start, limit, locale,
       }),
-      strapi.entityService.count('api::blog.blog', { locale }),
+      strapi.entityService.count('api::blog.blog', { filters, locale }),
     ]);
     setPaginationHeaders(ctx, page, pageSize, total);
     ctx.body = data;
