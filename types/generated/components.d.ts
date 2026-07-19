@@ -390,6 +390,16 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedTable extends Struct.ComponentSchema {
+  collectionName: 'components_shared_tables';
+  info: {
+    displayName: 'Table';
+  };
+  attributes: {
+    TableJSON: Schema.Attribute.JSON;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -425,6 +435,7 @@ declare module '@strapi/strapi' {
       'shared.related-vrat-katha': SharedRelatedVratKatha;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
+      'shared.table': SharedTable;
     }
   }
 }

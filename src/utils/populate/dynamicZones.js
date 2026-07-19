@@ -79,7 +79,9 @@ module.exports = {
                     image: media,
                 },
             },
-
+            'shared.table': {
+                populate: '*',
+            },
         },
     },
 

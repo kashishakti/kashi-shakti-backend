@@ -71,7 +71,8 @@
         "shared.rich-text",
         "section.mantra-card-widget",
         "section.pandit-widget",
-        "shared.image"
+        "shared.image",
+        "shared.table"
       ]
     },
     "SEO": {

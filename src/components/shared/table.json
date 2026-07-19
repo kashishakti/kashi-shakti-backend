@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_tables",
+  "info": {
+    "displayName": "Table"
+  },
+  "options": {},
+  "attributes": {
+    "TableJSON": {
+      "type": "json"
+    }
+  },
+  "config": {}
+}
